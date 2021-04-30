@@ -14,6 +14,10 @@ const links = [
     {
         label: "Ch7: Events",
         url: "notes/ch7.html"
+    },
+    {
+        label: "Team Activity",
+        url: "team-activity/team.html"
     }
 ];
 
