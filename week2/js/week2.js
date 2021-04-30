@@ -8,7 +8,7 @@ const links = [
         url: "notes/ch5.html"
     },
     {
-        label: "Ch6: Document Objedct Model",
+        label: "Ch6: Document Object Model",
         url: "notes/ch6.html"
     },
     {
