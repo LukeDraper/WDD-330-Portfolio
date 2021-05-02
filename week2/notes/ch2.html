@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WDD 330 Portfolio</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1> WDD 330 Portfolio</h1>
+        <h2>Ch2: Programming Basics
+            
+        </h2>
+        <h3>Comments about comments</h3>
+        <p>
+            //This is a single line comments
+            <br>
+            /* This is a <br>
+            multiline comment <br>
+            example <br>
+            */
+            <br><br>
+            Comments are extremely important. How else will you remember what your code even does?
+
+        </p>
+        <h3>Javascript Grammar</h3>
+        <ul>
+            <li>Javascript uses C-style syntax</li>
+            <li>semi-colons are automatically inserted in Javascript, but it's best to put them in yourself because errors can arise</li>
+            <li>Blocks are sections of code within curly braces</li>
+            <li>whitespace can be used freely</li>
+        </ul>
+        
+        <h3>List of Reserved Words</h3>
+        <p>abstract, await, boolean, break, byte, case, catch, char, class, const, continue, debugger, default, delete, do, double, else, enum, export, extends, false, final, finally, float, for, function, goto, if, implements, import, in instanceof, int, interface, let, long, native, new, null, package, private, protected, public, return, short, static, super, switch, synchronized, this, throw, throws, transient, true, try, typeof, var, volatile, void, while, with, yield
+            <br>
+            <br>
+            Some of the words are used in the language, some weren't.
+            The following should have been reserved but weren't: undefined, NaN, Infinity
+
+        </p>
+
+        <h3>Primitive Data Types</h3>
+        <p>
+            There are 7 data types and 6 of them are primitive data types in Javascript:
+            <ul>
+                <li>String</li>
+                <li>Symbol</li>
+                <li>Number</li>
+                <li>Number</li>
+                <li>Boolean</li>
+                <li>Undefined</li>
+                <li>Null</li>
+            </ul>
+            All other data types are objects. Use typeof to determine data type.
+            <br>
+            Example:
+            <br>
+            typeof 10<br>
+            &lt&lt 'number'
+        </p>
+        <h3>Assigning and Declaring Variable</h3>
+        <p> 
+            While using the <b>const</b> keyword, if it references a non-primitive data type
+            like an array, function, or object then the data inside the object can change. This
+            is known as mutating the object. 
+            <br>
+            Because const variables can't be changed, most variables should be declared as const
+            to make the program more predictable.
+        </p>
+        <h3>Global Scope</h3>
+        <p>Variables declared outsided any block have global scope. They can be accessed from anywhere in the program.
+            Variables with global scope should be kept to a minimum. They can mess things up with same variable names.
+        </p>
+        <h3>Assignment by Reference</h3>
+        <p>
+            Assigning a non-primitive value to a variable is done by reference.
+            Any changes made will affect all references to that object.
+        </p>
+        <h3>Backslash is the escape character in strings. \\ Double backslash is used to place one backslash.</h3>
+        <h3>Wrapper Objects</h3>
+        <p>Only objects have properties and methods, so JS makes wrapper objects for primitive data types. This happens in the background.</p>
+        <h3>Template Literals</h3>
+        <p> JS can now use the backtick character ` to deliminate strings. This allows for used of both kinds of quotation marks inside one string without
+            using the backslash. Interpolations can also be used freely inside the backtick characters. It's common to see backticks used for all strings
+            in all ES6 code.
+        </p>
+        <h3>Symbols</h3>
+        <p> Symbols are the only primitives without a literal form. They can create unique values.</p>
+
+        <h3>Infinity</h3>
+        <p>Infinity is used as an error for when there are numbers too big for the language to deal with. There is also -Infinity.</p>
+        <h3>NaN</h3>
+        <p>Error value for when an operation is attempted, but the result isn't numerical.</p>
+        <h3>Type Coercion</h3>
+        <p> When operations are performed JS tries to make the operands the same type. 
+            Sometimes this doesn't work, so it is best to manually change types if needed.</p>
+
+        
+
+    </body>
+</html>
