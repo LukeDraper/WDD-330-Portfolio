@@ -1,19 +1,19 @@
 const links = [
     {
-        label: "Object Methods: this notes",
+        label: "Javascript Exercise",
         url: "notes/objectMethods.html"
     },
     {
-        label: "Ch5: Objects notes",
-        url: "notes/ch5.html"
+        label: "Ch2: Programming Basics",
+        url: "notes/ch2.html"
     },
     {
-        label: "Ch6: Document Object Model",
-        url: "notes/ch6.html"
+        label: "Ch3: Arrays, Logic, and Loops",
+        url: "notes/ch3.html"
     },
     {
-        label: "Ch7: Events",
-        url: "notes/ch7.html"
+        label: "Ch4: Functions",
+        url: "notes/ch4.html"
     },
     {
         label: "Team Activity",

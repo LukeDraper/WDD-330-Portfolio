@@ -7,7 +7,76 @@
     </head>
     <body>
         <h1> WDD 330 Portfolio</h1>
-        <h2>Ch6: Document Object Model Notes</h2>
+        <h2>Ch4: Functions</h2>
+        <a href="https://www.sitepoint.com/premium/books/javascript-novice-to-ninja-2nd-edition/read/4">Link to Chapter 4</a>
+        <h3>Functions</h3>
+        <p>Functions can be used to replace code in multiple places that does the same thing. 
+            This allows you not to repeat yourself, but also it allows you to update a lot of code just by changing one piece.
+            <ul>
+                <li>To invoke a function through a variable you need to place parentheses after it: myFunction();
+                    You won't use the parentheses if you are assigning the function to a new varaible.
+                </li>
+                <li>All functions return a value. The default return value is undefined, but it can be anything put after the return keyword.</li>
+                <li>Arrow Functions
+                    <ul>
+                        <li>Arrow functions are best used for short, anonymous functions.</li>
+                    </ul>
+                </li>
+                <li>Function Hoisting
+                    <ul>
+                        <li>Hoisting is the javascript interpreter's action of moving all variable and function declarations to the top of the current scope
+                            regardless of where they are defined.
+                        </li>
+                        <li>Functions can be used before they are defined because of hoisting.</li>
+                        <li>All function definitions can be placed together, rather than having to define every function before it is used.</li>
 
+                    </ul>
+
+                </li>
+                <li>Variable hoisting
+                    <ul>
+                        <li>variable declarations using the var keyword are hoisted.</li>
+                        <li>Assignment is not hoisted. Variables have a value of undefined until assignment.
+                        </li>
+                        <li>It's best practice to use const or let at the beginninng of a block so hoisting is unnecessary.</li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </p>
+        <h3>Arguments and parameters</h3>
+        <p> Paremeters that a function needs are set when the function is defined, but 
+            when the function is invoked it is provided with arguments. Arguments take the 
+            place of parameters when they are invoked.
+            <ul>
+                <li>Default Parameters can be specified
+                    <ul>
+                        <li>Example: <br>function hello(name='World') { <br>
+                            console.log(`Hello ${name}!);
+                        }</li>
+                        <li> Default Parameters should always come after non-default parameters
+                            because otherwise you would be forced to enter the default parameters
+                            anyway.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
+        <h3>Callbacks</h3>
+        <p>
+            A function can be passed as an argument to another function. 
+            The function that is passed is known as a callback.
+            <br>
+            Code to check if argument is a function:<br>
+            if(typeof(callback) === 'function'){<br>
+                callback();<br>
+            }<br>
+            <br>
+            Callbacks are only useful for one-off tasks. It's usually better to keep
+            functions separate and named for reuse.
+        </p>
+
+        <h3>Iterators</h3>
     </body>
 </html>

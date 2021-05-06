@@ -8,6 +8,236 @@
     <body>
         <h1> WDD 330 Portfolio</h1>
         <h2>Ch3. Arrays, Logic, and Loops.</h2>
-        <h3></h3>
+        <a href="https://www.sitepoint.com/premium/books/javascript-novice-to-ninja-2nd-edition/read/3">Chapter 3 Link</a>
+        <h3>Initializing Array</h3>
+        <p>Empty array creation: <br>
+            const heroes = [];
+            <br>or<br>
+            const my Array = new Array();
+            <br>
+            The first version is called an array literal. It's better to use for some reasons,
+            and it requires less typing.
+        </p>
+        <h3>Adding Values to Arrays</h3>
+        <p>
+            Each item of an array can be treated like a variable. You can change the value using
+            the assignment operator =. <br><br>
+            heroes[0] = 'Batman';<br>
+            <br>
+            If you add a value to a later index like: <br><br> heroes[5] = 'Aquaman';<br><br>
+            The array's size will increase, but the values between the two filled portions will be undefined, and will show up as 
+            that if you display the array.
+            <h3>Creating Array Literals</h3>
+            Each value of an array can be a different data type in JS.
+        </p>
+
+        <h3>Removing Values from Arrays</h3>
+        <p>
+            Use the delete operator to remove an item from an array.
+            <br><br> delete avengers[3];
+            <br>This code will make the element at that index undefined.
+
+
+        </p>
+        <h3>Destructuring Arrays</h3>
+        <p>
+            Destructuring an array is taking values out of an array and showing them as individual values.
+            This allows us to assign multiple values at the same time.
+            <br><br>
+            const [x, y] = [1,2];
+            <br>
+            The previous line of code uses an array to assign the values, but Each
+            value exists on its own outside the array when called.
+        </p>
+        <h3>Array Properties and Methods</h3>
+        <p>
+            The length property returns the length of an array:
+            <br> avengers.length;
+            <br><br>
+            arrayName[arrayName.length-1]; Returns the last item in an array.
+            <br>myArray.length = 8; This line changes the array's length to 8 items.
+            Extra slots are filled with undefined. Shortening an array removes extra elements
+            entirely.
+
+        </p>
+
+        <h3>Pop, Push, Shift, and Unshift</h3>
+        <p>
+            <ul>
+                <li>pop(); method removes the lasts item of the array and return its values.</li>
+                <li>shift() method works like pop() but removes the first item of the array.</li>
+                <li>push() method appends the value in the parentheses to the end of the array. </li>
+                <li>unshift() works like push but at the beginning of the array.</li>
+                <br>
+        </ul>
+        </p>
+
+        <h3>Merging Arrays</h3>
+        <p>
+            <ul>
+                <li>concat() method
+                    <ul> 
+                        <li>concat() method merges an array with one or more arrays.</li>
+                        <li>Form:   myArray.concat(array2)</li>
+                        <li>Second array is appended to the first.</li>
+                    </ul>
+                </li>
+                <li>spread operator (...)
+                    <ul>
+                        <li>The spread operator works like concat, but uses three elipses acting as the spread operator rather than a method.</li>
+                        <li>Example:    avengers = [ ...avengers, ...['Hulk','Hawkeye', 'Black Widow'] ];
+                            <br> Result: ['Captain America', 'Iron Man', 'Thor', 'Hulk', 'Hawkeye', 'Black Widow']</li>
+                            
+                    </ul>
+                </li>
+
+            </ul>
+        </p>
+        <h3>Join method</h3>
+        <p>
+            The join() method turns an array into a string with each item in the array being separated by a comma. You 
+            can also choose a different separator.
+        </p>
+
+        <h3>Slicing and Splicing</h3>
+        <p>
+            <ul>
+                <li>slice() method
+                    <ul>
+                        <li>Slice selects part of an array and return that part of it without removing it from the original.</li>
+                        <li>Example:  avengers.slice(2,4) // starts at the third item (index of 2) and finishes at the fourth (the item with index 4 is not included)
+                            <br> Result:  ['Thor', 'Hulk']</li>
+                    </ul>
+                </li> 
+                <li>splice() method
+                    <ul>
+                        <li>myArray.splice(starting index, number of items, values at this point and after will replace items removed from array );</li>
+                        <li>Using splice with a 2nd value of zero works to insert an item into the array.</li>
+                        <li>splice returns the values that were removed in the form of an array.</li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
+        <h3>Reverse</h3>
+        <ul>
+            <li>Reverses order of array within the variable.</li>
+        </ul>
+        <h3>Sort</h3>
+        <ul>
+            <li>Sort the array permanently.</li>
+            <li>Can be undone with a callback.</li>
+        </ul>
+        <h3>Finding if a value is in an array</h3>
+        <p>
+            <ul>
+                <li>indexOf() method
+                    <ul>
+                        <li>Returns the index of the first occurence of a given value in an array</li>
+                        <li>Example: myArray.indexOf(value to check for)</li>
+                        <li>Return -1 if the search value isn't in the array.</li>
+                    </ul>
+                </li>
+                <li>includes() method
+                    <ul>
+                        <li>myArray.includes(Value to search for, optional argument for starting index);</li>
+                        <li>Returns a boolean value that is true if the search value occurs in the array at least once.</li>
+
+                    </ul>
+                </li>
+            </ul>
+        </p>
+        <h3>Multidimensional Arrays</h3>
+        <ul>
+            <li>Multidimensional Arrays can be used to create a coordinate system.</li>
+            <li>Accessed using two sets of indeces inside square brackets: multiArray[0][3];</li>
+            <li>The spread operator can be used to flatten a multidimensional array into a single dimension.</li>
+
+        </ul>
+
+        <h3>Sets</h3>
+        <p>Data structure that represents a collection of unique values. No duplicates. No need to check for duplicates. They aren't 
+            allowed. It's quick to find if a particular value is in the set.
+            <br><br>
+            Creating a new set:<br>
+            const list = new Set();
+            <br><br>
+            Adding a new set:<br>
+            list.add(1);
+            <br><br>
+            Duplicate variables that are added to the set are ignored instead.
+            However, type coercion is not used on values being added to a set, 
+            so the same value can be added as a different data type.
+        </p>
+
+        <h3>Set Methods</h3>
+        <ul>
+            <li>size() method returns the number of elements in a set.</li>
+            <li>has() method checks if a value is in a set, and is much faster than 
+                using includes() or indexOf().
+            </li>
+            <li> You can't use index notation to look at individual values in a set.</li>
+            
+        </ul>
+
+        <h3>Removing Values from sets</h3>
+        <p>
+            <li>delet() removes a value from a set, and returns true if the variable if removed. It returns
+                false if the value isn't in the set.
+            </li>
+            <li>clear() removes all values from the set</li>
+        </p>
+
+        <h3>Converting Sets to Arrays</h3>
+        <p>
+            A set placed into an array literal along with the spread operator will be
+            converted into an array.
+            <br><br>
+            You can also use the Array.from() method.
+            <br>
+            const shoppingSet = new Set().add('Apples').add('Bananas').add('Beans');
+            <br>const shoppingArray = Array.from(shoppingSet);
+        </p>
+        <h3>Weak Sets and Avoiding Memory Leaks</h3>
+        <p>
+            Objects added to sets won't be garbage-collected, and this can cause memory
+            leaks. You can declare a weak set to avoid this:<br>
+            const weak = new WeakSet();<br>
+            Only non-primitive data types can be added to weak sets.
+            Adding primitive values will throw a type error. Weak sets don't have access
+            to the values contained in arrays in the weak set, so returning the contents of 
+            a weak set does not show that it contains the array, but you can check
+            using the has() method.
+        </p>
+        <h3>Maps</h3>
+        <p>
+            <ul>
+                <li>Maps keep a list of key-values pairs.</li>
+                <li>Maps can use any data type as a key whereas Objects can only use strings.</li>
+                <li>There is only one way to create maps:<br>
+                    const romanNumerals = new Map();
+                </li>
+                <li>The set() method can be used to add a key and value pair to a map. The first value is the key and the second is the value:
+                    <br>romanNumerals.set(1,'I');
+                </li>
+
+            </ul>
+        </p>
+        <h3>Ternary Operator (shorthand for writing an if else statement)</h3>
+        <p>
+            ? is the ternary operator. It takes three operands:<br>
+            condition ? (//code to run if condition is true) : (//code to run if condition is false)
+            <br><br>
+            Example:<br>
+            const n = 5;<br>
+            n%2 === 0 ? console.log('n is an even number') : console.log('n is an odd number');
+            <br>Output: 'n is an odd number'
+            <br>
+            Shortened example within a template string:
+            <br>console.log(`n is a ${(n%2 === 0)? 'even' : 'odd'} number`);
+
+
+        </p>
+
+
     </body>
 </html>
