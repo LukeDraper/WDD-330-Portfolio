@@ -1,7 +1,7 @@
 const links = [
     {
         label: "Javascript Exercise",
-        url: "notes/objectMethods.html"
+        url: "exercises/quiz.html"
     },
     {
         label: "Ch2: Programming Basics",
