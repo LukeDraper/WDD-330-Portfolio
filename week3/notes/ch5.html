@@ -7,7 +7,254 @@
     </head>
     <body>
         <h1> WDD 330 Portfolio</h1>
-        <h2>Object Method Notes</h2>
+        <h2>Chapter 5: Objects</h2>
+        <p>Javascript Objects are like dictionaries wher you look up a property name and see a value.
+            Javascript objects can be quickly created in object literals, which is where all of a Javascript
+            object's properties and methods are wrapped in curly braces. 
+            <br>Here is an example of an object literal that describes the Man of Steel:
+            <pre>
+                const superman = {
+                    name: 'Superman',
+                    'real name': 'Clark Kent',
+                    height: 75,
+                    weight: 235,
+                    hero: true,
+                    villain: false,
+                    allies: ['Batman','Supergirl','Superboy'],
+                    fly() {
+                        return 'Up, up and away!';
+                    }
+                };
+            </pre>
+
+            <br>
+            Properties are key-value pairs shown above. If a property's name doesn't follow the rules for naming variables 
+            then it needs to be quoted. Above the property 'real name' needs to be quoted because of the space in it. Often
+            the property would follow variable naming rules to avoid this. 'real name' would instead use the name realName or real_name. 
+            <br><br>
+            Properties can be accessed through dot-notation. 
+        </p>
+        <h3>Computed Properties</h3>
+        <p>
+            Objects can be created with computed keys or properties. This means that at the time of creation both keys and properties
+            can be created through the use of some function whether that is concatenation, a ternary operator(if else statement), and more.
+            <br><br>
+            The new Symbol date type can also be used as a computed property key:<br>
+            <pre>
+        const name = Symbol('name');
+        const supergirl = { [name]: 'Supergirl' };
+            </pre>
+            This property can be accessed with square bracket notation: supergirl[name]; <br>
+            New properties can be added with a symbol as a key if it uses square bracket notation.
+            <pre>
+                const realName = Symbol('real name');
+                supergirl[realName] = 'Kara Danvers';
+            </pre>
+            Symbols can be reused with many objects.
+        </p>
+        <h3>Callling Methods</h3>
+        <p>Methods can be called using dot notation: superman.fly(); <br>
+            or using bracket notation: superman['fly']()
+        </p>
+        <h3>Checking if properties or Methods Exist</h3>
+        <p>
+            The in operator can check whether an object has a property:
+            <br>'city' in superman; <br> 
+            returns either true or false
+            <br>You can also check if a property returns undefined: superman.city !== undefined;
+            <br><br>
+            There is also the hasOwnProperty() method. This returns true if the object has a particular 
+            property, but it returns false if the property is inherited from another object.
+
+        </p>
+        <h3>Finding all the properties of an object</h3>
+        <p>
+            A for in loop can loop through all of the properties of an object:
+            <pre>
+                for(const key in superman) {
+                    console.log(key + ": " + superman[key]);
+                }
+                 "name: Superman"
+                 "real name: Clark Kent"
+                 "height: 75"
+                 "weight: 235"
+                 "hero: true"
+                 "villain: false"
+                 "allies: Batman,Supergirl,Superboy"
+                 "fly: function (){
+                    console.log(\"Up, up and away!\");
+                }"
+            </pre>
+            The key property is used in the example to log the name of the property, and superman[key] accesses the value
+            for logging. The hasOwnProperty method can be used to make sure that only an object's own properties are returned.
+            <br>Another way to do this is Object.keys(superman) which returns an array of all the keys of 
+            any object. Object.values() works the same, but returns an array of all of the object's values.
+            Object.entries() returns an array of key-value pairs. These key-value pairs can be accessed individually with the following
+            notation: 
+            <pre>
+                for(const [key,value] of Object.entries(superman)) {
+                    console.log(`${key}: ${value}`);
+                }
+                    name: Superman
+                    real name: Clark Kent
+                    height: 75
+                    weight: 235
+                    hero: true
+                    villain: false
+                    allies: [ 'Batman','Supergirl','Superboy' ]
+                    fly: [Function: fly]
+            </pre>
+
+            
+        </p>
+        <h3>Adding properties</h3>
+        <p>New properties can be added at any time by assigning a value to the property that you want to add.
+            Properties have no specific order, so they won't always be in the order they are added.
+        </p>
+
+        <h3>Changing Properties</h3>
+        <p>
+            Assignment can be used to change the value of a property at any time.
+        </p>
+
+        <h3>Removing Properties</h3>
+        <p>
+            delete operator removes properties: delete superman.fly;
+        </p>
+
+        <h3>Nested Objects</h3>
+        <p>
+            Objects can contain other objects as values. They can be accessed by using 
+            each property name in dot or bracket notation or a mix of the two:<br>
+            jla.wonderwoman.realName;
+            <br>jla['flash']['realName'];
+            <br>jla.aquaman['realName'];
+            <br><br>
+            
+
+        </p>
+
+        <h3>Objects are copied by reference</h3>
+        <p>
+            If we set a new object equal to an existing object it will assign it to the same reference,
+            so if we change properties of the new object it will affect the old one as well. 
+        </p>
+
+        <h3>Objects as parameters to functions</h3>
+        <p>
+            Object literals can be passed as parameters to functions, allowing them to be passed in any order.
+            Example:
+            <pre>
+                function greet({greeting,name,age}) {
+                    return `${greeting}! My name is ${name} and I am ${age} years old.`;
+                }
+
+        This accepts the following parameters in any order:
+
+                greet({ greeting: `What's up dude`, age: 10, name: `Bart` });
+                'What\'s up dude! My name is Bart and I am 10 years old.'
+            </pre>
+            This is known as using named parameters and is helpful for when there are many optional parameters.
+        </p>
+
+        <h3>Namespacing</h3>
+        <p>
+            Naming collisions happen when the same variable or function name is repeated for different uses within
+            the same scope. This can be avoided by using the <b>object literal pattern</b> to create a namespace
+            for groups of related functions.
+            <br><br>
+            Functions avoid naming collisions by being put in an object.
+        </p>
+
+        <h3>JSON</h3>
+        <p>
+            JSON is a string representation of object literal notation with the following differences:
+            <ol>
+                <li>Property names must be double-quoted</li>
+                <li>Permitted values are double-quoted strings, numbers, true, false, null, arrays, and objects.</li>
+                <li>Functions are not permitted values.</li>
+            </ol>
+            JSON is very popular. Javascript has a global JSON object for parsing and generating it.
+            It has a parse method to turn a JSON string into an object: JSON.parse(myJSONstring); <br>
+            The method stringify() is used to turn an object in a JSON string: JSON.stringify(myObject);
+
+        </p>
+
+        <h3>Math Object</h3>
+        <p>
+            The Math object is a built-in object with some properties representing mathematical constants,
+            and methods to do common mathematical operations. The Math object's properties and methods cannot 
+            be changed.
+        </p>
+
+        <h3>mathematical Constants</h3>
+        <pre>
+            Math.PI // The ratio of the circumference and diameter of a circle
+            3.141592653589793
+            Math.SQRT2 // The square root of 2
+             1.4142135623730951
+            Math.SQRT1_2 // The reciprocal of the square root of 2
+             0.7071067811865476
+            Math.E // Euler's constant
+             2.718281828459045
+            Math.LN2 // The natural logarithm of 2
+             0.6931471805599453
+            Math.LN10 // The natural logarithm of 10
+             2.302585092994046
+            Math.LOG2E // Log base 2 of Euler's constant
+             1.4426950408889634
+            Math.LOG10E // Log base 10 of Euler's constant
+             0.4342944819032518
+        </pre>
+
+        <h3>mathematical Methods</h3>
+        <ul>
+            <li>Math.abs() returns the absolute value of its argument.</li>
+            <li>Math.ceil() rounds up to the next nearest integer. Doesn't change if it is already
+                an integer.
+            </li>
+            <li>
+                Math.floor() rounds down to the next nearest integer. Doesn't change if it is already
+                an integer.
+            </li>
+            <li>Math.round() rounds to the nearest integer.</li>
+            <li>Math.trunc() returns the integer part of a number. Just cuts off anything after the decimal point.</li>
+            <li>Math.exp() will raise a number to the power of Euler's constant.</li>
+            <li>Math.pow() will raise the first argument to the power of the second argument.</li>
+            <li>Math.sqrt() returns the positive square root of a number.</li>
+            <li>Math.cbrt() returns the cube root of numbers.</li>
+            <li>Math.hypot() returns the square root of the sum of the square of all its arguments.
+                Can be used to calculate the hypotenuse of a right-angled triangle.
+
+            </li>
+            <li>Math.log() returns the natural logarithm of a number. Math.log2() does base 2. Math.log10() is base 10.</li>
+            <li>Math.max</li>
+            <li>There are also trigonometric functiosn like Math.cos().</li>
+            <li>Math.random() generates a random number.</li>
+        </ul>
+
+        <h3>
+            The Date Object
+        </h3>
+        <p>
+            The date object can have the following parameters:
+            <pre>
+                new Date(year,month,day,hour,minutes,seconds,milliseconds)
+            </pre>
+            <h3>Getter Methods</h3>
+            The properties of date objects are unable to be viewed or changed directly. They
+            instead have getter methods to return information about the date object.
+            Most of the getter methods have two versions: one that returns information in local time
+            and another that uses Coordinated Universal Time (UTC).
+
+            <h3>Setter Methods</h3>
+            Often, there are setter methods in addition to getter methods to allow us to
+            change the properties.
+        </p>
+
+
+
+
 
     </body>
 </html>

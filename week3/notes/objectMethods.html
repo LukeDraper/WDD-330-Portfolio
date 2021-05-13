@@ -9,5 +9,67 @@
         <h1> WDD 330 Portfolio</h1>
         <h2>Object Method Notes</h2>
 
+        <p>
+            Functions that are properties of objects are object methods. These allow 
+            them to do actions that are related to the objects.
+        </p>
+        <h3>
+            Method shorthand
+        </h3>
+        <p>
+            Orginal:
+            <pre>
+                user = {
+                    sayHi: function() {
+                        alert("Hello");
+                    }
+                };
+            </pre>
+            Method shorthand(functions the same):
+            <pre>
+                user = {
+                    sayHi() {
+                        alert("Hello");
+                    }
+                };
+            </pre>
+        </p>
+        <h3>"This" keyword in methods</h3>
+        <p>
+            The keyword "this" can be used to reference the object used to 
+            call the method. It can be used to acccess object variables. If 
+            there is a member variable called name then it can be referred to 
+            using this.name  
+        </p>
+
+        <h3>"this" is not bound in javacript</h3>
+        <p>When obj.f is called then this is obj during the call of f.
+            <br><br>
+            If this is called without an object then it is undefined. "this" can also
+            refer to the global object, which could be a window in a browser.
+            <br><br>
+            The value of "this" ies evaluated at call-time.
+        </p>
+        <h3>Arrow function have no "this"</h3>
+        <p>
+            If "this" is called from within an arrow function then it will use "this" from
+            the outer function. Example:
+            <pre>
+                let user = {
+                    firstName: "Ilya",
+                    sayHi() {
+                      let arrow = () => alert(this.firstName);
+                      arrow();
+                    }
+                  };
+                  
+                  user.sayHi(); // Ilya
+            </pre>
+        </p>
+        
+
+
+
+
     </body>
 </html>

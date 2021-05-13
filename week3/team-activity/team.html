@@ -6,6 +6,7 @@
   </head>
   <body>
     <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+    <div id="results"></div>
     <script>
       // Get your shorts on - this is an array workout!
       // ## Array Cardio Day 1
@@ -71,29 +72,97 @@
         'Blake, William'
       ];
 
+      const results = document.getElementById("results");
       // Array.prototype.filter()
       // 1. Filter the list of inventors for those who were born in the 1500's
+      console.log("Filtering inventor list for those born in the 1500s.")
+      results.innerHTML += "The following inventors were all born in the 16th century AD:<br><ul>"
+      sixteenthCentury = inventors.filter(function (inventor, index) {
+        if (inventor.year < 1600 && inventor.year > 1499) {
+            results.innerHTML += "<li>" + inventor.first + " " + inventor.last + "</li>";
+            return inventor;
+        }
+      });
+      results.innerHTML += "</ul><br><br>"
+      console.log(sixteenthCentury);
 
       // Array.prototype.map()
       // 2. Give us an array of the inventors' first and last names
-
+      console.log("Inventors' first and last names.")
+      results.innerHTML += "Inventors' first and last names:<br><ul>"
+      fullNames = inventors.filter(function (inventor, index) {
+            results.innerHTML += "<li>" + inventor.first + " " + inventor.last + "</li>";
+            let fullName = inventor.first + " " + inventor.last;
+            return fullName;
+      });
+      results.innerHTML += "</ul><br><br>"
+      console.log(fullNames);
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
-
+      console.log("Inventors sorted by birthdate, oldest to youngest.")
+      results.innerHTML += "Inventors sorted by birthdate, oldest to youngest:<br><ul>"
+      let ages = inventors;
+      ages.sort(function compareAge(inv1, inv2) {
+          return inv1.year - inv2.year;
+      });
+      console.log(ages);
+      ages.forEach(function (inventor, index) {
+        let birthInfo = "<li>" + inventor.year + ", " + inventor.first + " " + inventor.last + "</li>";
+        results.innerHTML += birthInfo;
+      });
+      results.innerHTML += "</ul><br><br>"
+      console.log(ages);
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live?
+      console.log("Inventors' total years lived:")
+      results.innerHTML += "Inventors' total years lived: "
+      const totalAge = inventors.reduce((total, inventor) => {
+        return total + (inventor.passed - inventor.year);
+      }, 0);
+      console.log(totalAge + " years");
+      results.innerHTML += totalAge + "<br><br>";
 
       // 5. Sort the inventors by years lived
+      console.log("Inventors sorted by lifespan, least to most.")
+      results.innerHTML += "Inventors sorted by birthdate, oldest to youngest:<br><ul>"
+      let lifespan = inventors;
+      lifespan.sort(function compareLifespan(inv1, inv2) {
+          return (inv1.passed - inv1.year) - (inv2.passed - inv2.year);
+      });
+      console.log(lifespan);
+      ages.forEach(function (inventor, index) {
+        let years = inventor.passed - inventor.year;
+        let ageInfo = "<li>" + years + " years, " + inventor.first + " " + inventor.last + "</li>";
+        results.innerHTML += ageInfo;
+      });
+      results.innerHTML += "</ul><br><br>"
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
       // goto the link above and open the console. Paste the following two lines in.  That will create a list of links in memory that you can reference through the console. Use that list to finish the problem.
-      // const category = document.querySelector('.mw-category');
-      // const links = Array.from(category.querySelectorAll('a'));
+      //   const category = document.querySelector('.mw-category');
+      //   const links = Array.from(category.querySelectorAll('a'));
+        //   var boulevards = [];
+        //   links.forEach(function (link, index) {
+        //     let name = link.innerHTML;
+        //     if (name.includes('de')) {
+        //         boulevards.push(name);
+        //     }
+        //   });
+        //   console.log(boulevards);
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
-
+      console.log("People sorted alphabetically by last name.")
+      results.innerHTML += "People sorted alphabetically by last name:<br><ul>"
+      let peopleSorted = people;
+      peopleSorted.sort();
+      console.log(peopleSorted);
+      peopleSorted.forEach(function (person, index) {
+        let personName = "<li>" + person + "</li>";
+        results.innerHTML += personName;
+      });
+      results.innerHTML += "</ul><br><br>"
       // 8. Reduce Exercise
       // Sum up the instances of each of these
       const data = [
@@ -112,6 +181,9 @@
         'car',
         'truck'
       ];
+      console.log(data)
+      console.log("The number of each kind of transportation in data.")
+      
     </script>
   </body>
 </html>
