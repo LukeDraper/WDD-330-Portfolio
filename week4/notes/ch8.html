@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WDD 330 Portfolio</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1> WDD 330 Portfolio</h1>
+        <h2>Chapter 8: Forms</h2>
+        <p>
+            Forms accept information that can be sent to a backend server using PHP or Ruby.
+            You can also process the information before sending it to the server using JavaScript.
+
+        </p>
+        
+        <h2>Accessing Form Elements</h2>
+        <p>
+            <ul>
+                <li>document.forms is a property that returns an HTML collection of 
+                    all of the forms in the document in the order they appear in the markup.
+                    <ul>
+                        <li>
+                            document.forms[0] returns the first form object in the document.
+                        </li>
+                        <li>document.getElementsByTagname('form') is equivalent to document.forms.</li>
+                        <li>The name attribute can be used to identify a form in place of the numerical index.
+                            document.forms.search; However if the form has the same name as any properties or methods of the document.forms object 
+                            then that property or method would be referenced insteaed of the form element. Square bracket notation can be used instead to 
+                            avoid this. document.forms['search'];
+                        </li>
+                    </ul>
+                </li>
+                <li>A form object has a method called elements that returns an HTML collection of all the elements contained in the form.
+                    <br>If a form has an input and a button, for example:
+                    <br> const [input, button] = form.elements;
+                </li>
+                <li>Form controls can be accessed through their names. If the input field's name was searchInput:<br>
+                    form.searchInput;
+                    <br>Or square bracket notation:
+                    <br> form['searchInput'];
+                </li>
+            </ul>
+        </p>
+
+        <h2>Form Properties and Methods</h2>
+        <ul>
+            <li>form.submit() will submit a form automatically.</li>
+            <li>form.reset() will reset all of the form controls back to their initial values specificed in the HTML.
+                Buttons with the type reset can do this without the need for additional scripting.
+            </li>
+            <li>form.action property can be used to set the action attributed. The URL on the server where the form needs to be
+                sent for procssing is what it should be set to.
+                <br> form.action = '/an/other.url'
+            </li>
+        </ul>
+
+        <h2>Submitting a Form</h2>
+        <p>Intercept a submit button by adding an event listener for submit
+            with the following code:
+            <pre>
+                const form = document.forms['search'];
+                form.addEventListener ('submit', search, false);
+                function search() {
+                    alert(' Form Submitted');
+                }
+            </pre>
+            With this code the form will still be submitted to the url. Use preventDefault()
+            to stop that from happening. Add it to the search function:
+            <pre>
+                function search(event) {
+                    alert('Form Submitted');
+                    event.preventDefault();
+                }
+            </pre>
+        </p>
+
+        <h2>Accessing input</h2>
+        <p>
+            Accessing what is in an input takes the following form:
+            <br> input.value <br>
+            This can return a value or assignment can be used to put a value in it.
+            <br>
+            The following code shows how to do hint text for an input by using the focus and blur events:
+            <pre>
+                input.addEventListener('focus', function(){
+                    if (input.value==='Search Here') {
+                        input.value = '' 
+                    }
+                }, false);
+                input.addEventListener('blur', function(){
+                    if(input.value === '') {
+                        input.value = 'Search Here';
+                    } }, false);
+            </pre>
+        </p>
+
+        <h2>Form Controls</h2>
+        <p>
+            <ul>
+                <li>input fields including text, passwords, check boxes, radio buttons, and file uploads.
+                    <ul>
+                        <li>text input fields: text is the default value for input type. Use type='text' to make the purpose of the field explicit.</li>
+                        <li>Password input fields: type='password' is used to enter passwords or secret information. The characters are concealed as soon as they are on screen.</li>
+                        <li>Checkbox input fields: type='checkbox' used to select different options that can be checked true or false. User can select more than one checkbox in a list.
+                            Boxes can be checked initially using the 'checked' attribute in HTML.
+                        </li>
+                        <li>Radio button input fields: type='radio' like checkedboxes but only allow one option to be true in a group that has the same Name
+                            attribute.</li>
+                        <li>
+                            Hidden input fields: type='hidden' are not displayed by the browser. Can be used to send information like settings or information that the user has already 
+                            provided. It will by sent with this form's action attribute. Can be found in HTML, so they should not be used for sensitive information.
+                        </li>
+                        <li>File input fields: type='file' can be used to upload files. Most broswers provide a browse button or similar that lets a user select a
+                            file from their file system.
+                        </li>
+                        <li>Other input types: HTML5 supports new input types such as number, tel, and color.
+                            These will validate automatically, and different browsers will implement different 
+                            UI elements to let users select these. Currently, browsers that do not support these will use 
+                            normal text-input fields in their place, so there is no risk to using them.
+                        </li>
+                    </ul>
+                </li>
+                <li>select menus for drop-down lists of options</li>
+                <li>textarea elements for longer text entry</li>
+                <li>button elements for submitting and resetting forms.
+                    <ul>
+                        <li>Submit type to submit a form according to its action attribute.</li>
+                        <li>Reset type to clear all form elements. Resets to default values.</li>
+                        <li>button type to just be a clickable button that an event listener can be attached to.</li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
+
+        <h2>Form Validation</h2>
+        <p>
+            Form validation can happen on client side or server side. Both should be used. It is possible to bypass front-end validation 
+            and send arbitrary data to the server side, so only secure server side validation should be trusted. Client side validation is 
+            good for providing good user experience.
+            <br>
+            Adding the 'required' attribute in HTML5 will keep a form from being submitted unless the form element has a value selected.
+            
+        </p>
+
+
+
+
+    </body>
+</html>

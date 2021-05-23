@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>Search</title>
+</head>
+<body>
+    <form name='search' action='/search'>
+        <input name='searchInput' value='Search Here'>
+        <button type='submit'>Search</button>
+    </form>
+<script>
+    const form = document.forms['search'];
+    const input = form.elements.searchInput;
+    // input.addEventListener('focus', () => alert('focused'), false);
+    
+
+    form.addEventListener ('submit', search, false);
+    
+    input.addEventListener('focus', function(){
+        if (input.value==='Search Here') {
+            input.value = '' 
+        }
+        }, false);
+
+    input.addEventListener('blur', function(){
+        if(input.value === '') {
+            input.value = 'Search Here';
+        } }, false);
+
+
+    function search(event) {
+        alert(`You Searched for: ${input.value}`);
+        event.preventDefault();
+    }
+
+</script>
+</body>
+</html>

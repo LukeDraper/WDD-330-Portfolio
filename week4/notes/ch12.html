@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WDD 330 Portfolio</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1> WDD 330 Portfolio</h1>
+        <h2>Chapter 12: Object Oriented Programming</h2>
+        <h3>Encapsulation</h3>
+        <p>
+            The inner functions of objects are kept secret, and only essential functionalities are exposed to the user.
+            Users know what to input to get desired output. That's about it. This lets implementation details change without
+            upending the users.
+        </p>
+        <h3>Polymorphism</h3>
+        <p>
+            Objects can share the same process, but have the ability to override shared methods
+            with more specific implementation.
+        </p>
+        <h3>Inheritance</h3>
+        <p>
+            In object-oriented programming we can take any object and inherit its properties and methods.
+            We can then improve it by adding new properties and methods or overriding some of the existing ones.
+        </p>
+        <h3>Classes</h3>
+        <p>
+            Classes define blueprints for creating objects. Classes are new to Javascript, and it is a prototype-based language
+            rather than a class-based language. It uses objects as a prototype for creating new objects. The objects based on the prototypes can
+            do everything the prototype could do with some being able to do more.
+        </p>
+
+        <h3>Constructor functions</h3>
+        <p>
+            Object literal notation can be used to create objects:
+            <pre>
+                const dice = {
+                    sides: 6,
+                    roll() {
+                        return Math.floor(this.sides * Math.random() + 1)
+                    }    
+                }
+            </pre>
+            Constructor Functions can too:
+            <pre>
+                const Dice = function(sides=6){
+                    this.sides = sides;
+                    this.roll = function() {
+                        return Math.floor(this.sides * Math.random() + 1)
+                    }
+                }
+            </pre>
+
+            Create an instance of the dice object: 
+            <pre>
+                const redDice = new Dice();
+        result:  Dice { sides: 6, roll: [Function] }
+            </pre>
+
+            instanceof operator can be used to check if something is an instance of a class:
+            <pre>
+                redDice instanceof Dice
+        result: true
+            </pre>
+        </p>
+
+        <h3>ES6 Class Declaration</h3>
+        <p>
+            ES6 introduced more class-like syntax for declaring a class:
+            <pre>
+                class Dice {
+                    constructor(sides=6) {
+                        this.sides = sides;
+                    }
+                    roll() {
+                        return Math.floor(this.sides * Math.random() + 1)
+                    }
+                }
+            </pre>
+            It can act jut like the constructor function syntax, but it's easier to read and 
+            the code in a class definition is implicitly in strict mode even without the 'use strict' statement.
+            Another benefit is that it throws an error when called without the new operator, which would before
+            just be hard to track down.
+        </p>
+
+        <h3>The constructor property</h3>
+        <p> The constructor property returns the constructor function that created it.
+            This can be used to call an unknown constructor to make a copy of an object:
+            <pre>
+                const greenDice = new redDice.constructor(10);
+                greenDice instanceOf Dice
+    result:     true
+            </pre>
+        </p>
+
+        <h3>Static Methods</h3>
+        <p>
+            The static keyword can be added to class declarations. Static methods are called by the class rather 
+            than by instances of the class.
+            <br>Example declaration of static method:
+            <pre>
+                class Dice {
+                    constructor(sides=6) {
+                        this.sides = sides;
+                    }
+                    roll() {
+                        return Math.floor(this.sides * Math.random() + 1)
+                    }
+                    static description() {
+                        return 'A way of choosing random numbers'
+                    }
+                }
+            </pre>
+            Calling a static method:
+            <pre>
+                Dice.description()
+    result:     'A way of choosing random numbers'
+            </pre>
+            Instances of classes cannot call static methods from themselves.
+            The class itself is used to call it.
+        </p>
+
+        <h3>Prototypal Inheritance</h3>
+        <p>
+            If you don't have access to the class declaration of a class, but want to augment it with extra
+            methods and properties after it has been created you can use the prototype property.
+            All classes and constructor function have a prototype property that returns an object:
+            <pre>
+                Turtle.prototype;
+        result: Turtle {}
+            </pre>
+            New properties and methods can be added to a prototype by assignment because it is an object.
+            <pre>
+                Turtle.prototype.weapon = 'Hands';
+
+                Turtle.prototype.attack = function(){
+                    return `Feel the power of my ${this.weapon}!`;
+                    }
+            </pre>
+            Any new objects of the same type will inherit the newly added properties and methods of the prototype
+            object in addition to what is in the class declaration.
+        </p>
+
+        <h3>Finding out the prototype</h3>
+        <p>You can call the prototype property to find out the prototype.
+            Another option is Object.getPrototypeOf() method, accepting the object as a parameter.
+            There is also an isPrototypeOf() method that returns a boolean. setPrototypeOf() method can 
+            set the prototype of an object.
+        </p>
+
+        <h3>Own properties and prototype properties</h3>
+        <p>
+            hasOwnProperty() method can be used to check if a property is an object's own or if it is inherited from a prototype.
+            Prototype properties are shared by every instance of the same class. The value is found in one place in memory, so it is efficient. It is good for properties
+            that need to be the same.
+        </p>
+
+        <h3>The Prototype is Live</h3>
+        <p>
+            Because the prototype object is live, if a new property or method is added to the prototype then 
+            any instances of its class will inherite the new properties and methods automatically, even if that instance 
+            has already been created.
+        </p>
+
+        <h3>Own Properties</h3>
+        <p>
+            Any properties or methods inherited from a prototype can be overwrited by assigning a new value 
+            to them. The property will become an 'own property' of the instance object. It will take precedence over the same prototype property when used in methods.
+
+        </p>
+
+        <h3>What to use the prototype for?</h3>
+
+        <p>
+            Methods are useful to add to a prototype because different instances will likely use the same ones. If values are different 
+            for a property then it does not need to be in the prototype.
+        </p>
+
+        <h3>Public and Private</h3>
+        <p>
+            Public properties and methods can be changed, but private properties and methods
+            cannot be accessed from outside the class itself. This means that they are accessed using getter and setter methods.
+        </p>
+
+        <h3>Prototype chain</h3>
+        <p>
+            If an object doesn't have the method that is called then its prototype is checked. Down the prototype chain is checked until
+            the object constructor is found at the end of the prototype chain. Creating objects from other objects will create a prototype chain.
+        </p>
+
+        <h3>
+            Enumerable Properties
+        </h3>
+        <p>
+            Enumerable properties will show up in a for-in loop, which loops through an object's properties and methods.
+            Non-enumerable properties don't show up.
+            <br><br>
+            propertyIsEnumberable() is a method that every object has, and can be used to check if a property is enumerable.
+            <br>
+            <br>
+            It's good practice for built-in methods to be non-enumerable, and any user-defined methods to be made enumerable.
+        </p>
+
+        <h3>
+            Inheritance using extends
+        </h3>
+        <p>
+            Keyword extends can be used for a class to inherit from another class.
+            Inside the child class declaration the keyword super refers to the parent class. It can access any properties and call any methods of the 
+            parent class. 
+        </p>
+
+        <h3>Mixins</h3>
+        <p>
+            The Object.assign() method provides basic mixin functionality. But only a shallow copy is made, so arrays and nested 
+            objects won't be mixed in properly. 
+
+            <pre>
+                const a = {};
+const b = { name: 'JavaScript' };
+Object.assign(a,b);
+result: { name: 'JavaScript' }
+a.name
+result: 'JavaScript'
+            </pre>
+
+            A mixin Function can be made to properly transfer things:
+            <pre>
+                function mixin(target,...objects) {
+                    for (const object of objects) {   
+                    if(typeof object === 'object') {
+                        for (const key of Object.keys(object)) {
+                            if (typeof object[key] === 'object') {
+                            target[key] = Array.isArray(object[key]) ? [] : {};
+                            mixin(target[key],object[key]);
+                            } else {
+                            Object.assign(target,object);  
+                            }
+                        }
+                        }
+                    }
+                    return target;
+                }
+            </pre>
+        </p>
+
+        <h3>Binding this</h3>
+        <p>
+            Sometimes this will refernce the global window object, often resulting in undefined values when in 
+            nested objects rather than what you want to use. 
+            You can set that equal to this and use that in its place.
+            <br><br>
+            bind(this) sets the value of this in the function.
+            <pre>
+                superman.findFriends = function() {
+                    this.friends.forEach(function(friend) {
+                        console.log(`${friend.name} is friends with ${this.name}`);
+                    }.bind(this);)
+                }
+                
+            </pre>
+
+            for-of could be used instead of forEach because it doesn't require a nested object.
+        </p>
+
+    </body>
+</html>

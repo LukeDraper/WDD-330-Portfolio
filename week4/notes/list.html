@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>MVC List</title>
+</head>
+<body>
+    <form id="input">
+        <label for='name'>Name:</label>
+        <input type='text' name='name' autofocus required >
+        <button type='submit'>Submit</button>
+    </form>
+    <ul id='list'></ul>
+    <script>
+        'use strict'
+const form = document.forms[0];
+class Item {
+    constructor(name) {
+        this.name = name;
+    }
+}
+
+const controller = {
+    watch(form) {
+        form.addEventListener('submit', (event) => {
+        event.preventDefault(); // prevent the form from being submitted
+        this.add(form.name.value);
+        }, false);
+    },
+    add(name) {
+        const item = new Item(name);
+        view.render(item);
+    }
+};
+
+
+const view = {
+    render(item) {
+        const list = document.getElementById('list');
+        const li = document.createElement('li');
+        li.innerHTML = item.name;
+        list.appendChild(li);
+        // reset the input field
+        form.name.value = '';
+    }
+};
+
+controller.watch(form);
+
+    </script>
+</body>
+</html>
