@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WDD 330 Portfolio</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1> WDD 330 Portfolio</h1>
+        <h2>Chapter 10: Testing and Debugging</h2>
+       <h3>Errors, Exceptions, and Warnings</h3>
+       <p>
+           <ul>
+               <li>Errors are cause when something goes wrong in a program. They are usually caused by one of the following:
+                   <ul>
+                       <li>System error- A problem with the system or external devices that the program is interacting with cause this problem.</li>
+                       <li>Programmer Error - The program has incorrect syntax or faulty logic. It might just be a typo.</li>
+                       <li>User Error - The user has entered data incorrectly, and the program can't handle it.</li>
+                   </ul>
+               </li>
+               <li>
+                   Exceptions are errors that produce return values that allow the program to deal with the error.
+                   Errors that the programmer planned for, and so they don't break the program.
+                   <ul>
+                       <li>A stack trace is produced by an exception. It works backward from the point where the error
+                           occurred to find out what function or method started the sequence that lead to the error.
+
+                       </li>
+                   </ul>
+
+               </li>
+               <li>Warnings are errors that aren't enough to cause the program to crash. Programs continue to run after a warning.
+                   This may allow the program to continue running incorrectly.
+                   Runtime errors that occur in a browser will still allow the HTML to appear, but the JavaScript code will stop in the background.
+                   Often warnings may not be able to be seen without going into the console depending on your browser.
+               </li>
+           </ul>
+       </p>
+
+       <h3>Strict Mode</h3>
+       <p>
+           Strict mode was introduced in ECMAScript 5. It produces more exceptions and warnings and prohibits the use of some deprecated features. 
+           Having strict mode on allows you to spot errors earlier one than if you produced fewer errors. Code that is not written in strict mode may 
+           be referred to as being developed in "sloppy mode." To use strict mode add the following line of code:
+           <br>'use strict';<br><br>
+
+           Strict mode can either be called at the first line of the file or the first-line of a function. The recommended way to use strict mode
+           is by placing all code inside a self-invoking function:
+           <pre>
+            (function() {
+                'use strict';
+                // All your code would go inside this function
+            }());
+           </pre>
+           ES6 introduced JavaScript modules which are in strict mode by default.
+       </p>
+
+       <h3>Linting Tools</h3>
+       <p>
+           Linting tools like JS Lint, JS Hint, and ES Lint test JavaScript code by highlighting sloppy programming practices or syntaxt errors.
+           These tools also complain if certain coding conventions are not followed. These coding conventions may be based on personal opinion, but
+           linting software can still be useful for enforcing a style-guide within a team.
+       </p>
+
+       <h3>Feature Detection</h3>
+       <p>
+           Not every browser supports every new feature that becomes a part of JavaScript or HTML5. Browsers can't always keep up, so you may need to determine
+           if a browser supports a particular feature. An if statement can be used to check if a feature exists:
+           <pre>
+            if (window.holoDeck) {
+                virtualReality.activate();
+            }
+           </pre>
+           There are also libraries that help check for feature detection.
+       </p>
+
+       <h3>Debugging in the Browser</h3>
+       <p>
+           When debugging, it is useful to set breakpoints so that you can check variables and make sure everything
+           has the values it is supposed to because often errors are thrown sometime after what actually causes the error.
+           Options for debugging include:
+           <ul>
+               <li>
+                   alert() method: The alert method stops a program from running until OK is clicked. This allows it to work as a basic breakpoint.
+                   It also is a good place to show the values returned by variables and functions.
+               </li>
+               <li>
+                   The console can be used for debugging. console.log() will send a message to the console. console.trace()
+                   will log an interactive stack trace in the console, showing what functions were called in the lead up to an exception ocurring while the code is running.
+               </li>
+               <li>
+                   Debugging tools that allow you to set breakpoints in your code. At those points you can see and modify all of the variables in your code. 
+                   The debugger; keyword can be inserted on a line to set a breakpoint that will allow you to check out what's going on in your browser.
+                   The debugger keyword should be removed after testing or it will interfere with normal function of your code.
+               </li>
+           </ul>
+       </p>
+
+       <h3>Error Objects</h3>
+       <p>
+           Error objects can be created by the host environment when an exception occurs or it can be created in the code using a constructor function:
+           <pre>
+            const error = new Error('Oops, something went wrong');
+           </pre>
+           The function accepts a parameter that's used as an error message.
+           There aer seven more error objects used for specific errors:
+           <ul>
+               <li>
+                EvalError is not used in the current ECMAScript specification and only retained for backwards compatibility. It was used to identify errors when using the global eval() function.
+               </li>
+               <li>
+                RangeError is thrown when a number is outside an allowable range of values.
+               </li>
+               <li>
+                ReferenceError is thrown when a reference is made to an item that doesn’t exist. For example, calling a function that hasn't been defined.
+               </li>
+               <li>
+                SyntaxError is thrown when there’s an error in the code’s syntax.
+               </li>
+               <li>
+                TypeError is thrown when there’s an error in the type of value used; for example, a string is used when a number is expected.
+               </li>
+               <li>
+                URIError is thrown when there’s a problem encoding or decoding the URI.
+               </li>
+               <li>
+                InternalError is a non-standard error that is thrown when an error occurs in the JavaScript engine. A common cause of this too much recursion.
+               </li>
+           </ul>
+           These error objects can be used as constructors to create custom error objects.
+           Example: 
+           <pre>
+            const error = new TypeError('You need to use numbers in this function');
+           </pre>
+
+       </p>
+
+       <h3>Throwing Exceptions</h3>
+       <p>
+           A throw statement can be applied to any JavaScript expressions, but it's best practice to throw an error object that can then be 
+           caught in a catch block.
+           <pre>
+            throw new Error('Something has gone badly wrong!');
+
+            or 
+
+            function squareRoot(number) {
+                'use strict';
+                if (number &lt; 0) {
+                    throw new RangeError('You can't find the square root of negative numbers')
+                }
+                return Math.sqrt(number);
+            };
+           </pre>
+       </p>
+
+       <h3>Exception Handling: try, catch, and finally</h3>
+       <p>
+           When an exception occurrs, the program terminates with an error message, but they can be handled by catching the error.
+            <br><br>
+            If we think an exception might occurr inside a block of code then we can wrap it in a try block. If an exception is thrown then the error object it creates
+            is passed to a catch block. The code in a catch block is only run if the exception is thrown in the try block. This allows the catch block to query the error name, message, and stack
+            properties from the error object. 
+            <br><br>
+            A finally block can be added after a catch block and it will always be executed whether or not an exception occurs.
+            <pre>
+                function imaginarySquareRoot(number) {
+                    'use strict';
+                    let answer;
+                    try {
+                        answer = String(squareRoot(number));
+                    } catch(error) {
+                        answer = squareRoot(-number)+"i";
+                    } finally {
+                        return `+ or - ${answer}`;
+                    }
+                }
+            </pre>
+            
+       </p>
+
+       <h3>Tests and Test-driven Development</h3>
+       <p>
+           Tests can be functions that put test values into functions to see if they work.
+           Test-driven development(TDD) is the process of writing tests before any actual code. They will fail 
+           to start wit because the code they test doesn't exist yet.
+           Has the following workflow:
+           <ol>
+               <li>Write tests (that initially fail)</li>
+               <li>Write code to pass the tests</li>
+               <li>Refactor the code</li>
+               <li>Test refactored code</li>
+               <li>Write more tests for new features</li>
+           </ol>
+       </p>
+
+    </body>
+</html>
