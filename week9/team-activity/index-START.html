@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+  <script>
+    let count = {
+      "65": 0,
+      "83": 0,
+      "68": 0,
+      "70": 0,
+      "71": 0,
+      "72": 0,
+      "74": 0,
+      "75": 0,
+      "76": 0,
+    }
+
+    function playAudio(key) {
+      document.querySelector(`audio[data-key="${key}"]`).play()
+    }
+
+    function stopAudio(key) {
+      const audioEl = document.querySelector(`audio[data-key="${key}"]`)
+      audioEl.pause()
+      audioEl.currentTime = 0
+    }
+
+    function moveDown(key) {
+      // Reset button
+      if (count[key] === 9) {
+        count[key] = 0
+        document.querySelector(`div[data-key="${key}"]`).style.transform = "translateY(0px)"
+      } else {
+        // Move button
+        count[key] += 1
+        console.log(key)
+        console.log(document.querySelector(`div[data-key="${key}"]`))
+        document.querySelector(`div[data-key="${key}"]`).style.transform = `translateY(${count[key] * 10}px)`;
+      }
+    }
+
+    const keyElements = document.querySelectorAll(".key");
+    keyElements.forEach(el => {
+      const key = el.getAttribute("data-key")
+      el.addEventListener("mousedown", function () {
+        playAudio(key);
+        el.classList.add("playing");
+        moveDown(key)
+      })
+      el.addEventListener("mouseup", function () {
+        el.classList.remove("playing");
+        stopAudio(key)
+      })
+    })
+
+    window.addEventListener("keydown", function (e) {
+      const key = e.which || e.keyCode
+      if (![65, 83, 68, 70, 71, 72, 74, 75, 76].includes(key)) {
+        return
+      }
+      document.querySelector(`div[data-key="${key}"]`).classList.add("playing");
+      playAudio(key);
+      moveDown(key)
+    })
+
+    window.addEventListener("keyup", function (e) {
+      const key = e.which || e.keyCode
+      if (![65, 83, 68, 70, 71, 72, 74, 75, 76].includes(key)) {
+        return
+      }
+      document.querySelector(`div[data-key="${key}"]`).classList.remove("playing");
+      stopAudio(key)
+    })
+  </script>
+
+
+</body>
+
+</html>

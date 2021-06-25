@@ -1,27 +1,11 @@
 const links = [
     {
-        label: "Week 1 notes",
-        url: "week1/index.html"
+        label: "Chapter 10: Testing and Debugging",
+        url: "notes/ch10.html"
     },
     {
-        label: "Week 2 notes",
-        url: "week2/index.html"
-    },
-    {
-        label: "Week 3 notes",
-        url: "week3/index.html"
-    },
-    {
-        label: "Week 4 notes",
-        url: "week4/index.html"
-    },
-    {
-        label: "Week 5 notes",
-        url: "week5/index.html"
-    },
-    {
-        label: "ToDo Project",
-        url: "todo/index.html"
+        label: "Team Activity",
+        url: "team-activity/index.html"
     }
 ];
 

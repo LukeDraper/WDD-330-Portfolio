@@ -1,11 +1,11 @@
 const links = [
     {
         label: "Chapter 10: Testing and Debugging",
-        url: "notes/ch8.html"
+        url: "notes/ch10.html"
     },
     {
         label: "Team Activity",
-        url: "team-activity/team.html"
+        url: "team-activity/index.html"
     }
 ];
 
