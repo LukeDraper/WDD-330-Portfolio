@@ -9,6 +9,7 @@ class Todos {
         this.key = "Todos";
         getTodos(this.key)
         this.listTodos();
+        this.addFilterListener();
     }
 
     
@@ -16,8 +17,11 @@ class Todos {
      * use the renderTodoList function to output our todo list when called.
      * It should get called when a todo is added, or removed, and when the Todos class is instantiated.
      */
-     listTodos() {
+     listTodos = () => {
         renderTodoList(todoList, this.element);
+        this.addXListener();
+        this.updateTaskNumDisplay();
+        this.addCompleteListener();
     }
 
 
@@ -37,12 +41,85 @@ class Todos {
         }
     }
 
-    static removeTodo(todoId) {
+    removeTodo = (todoId) => {
         todoList = todoList.filter(function(el) {return el.id != todoId});
         ls.writeToLS(this.key, todoList);
         this.listTodos();
     }
+
     
+    addXListener = () => {
+        console.log("addXListener")
+        const xBtns = document.querySelectorAll('.xBtn')
+        xBtns.forEach (el => {
+            console.log(el);
+            console.log(el.parentElement.getAttribute('todoid'));
+            utilities.onTouch(el, () => {this.removeTodo(el.parentElement.getAttribute('todoid'))});
+        })
+    }
+
+    updateTaskNumDisplay = () => {
+        const taskNumDisplay = document.querySelector('#taskNumber');
+        taskNumDisplay.innerHTML = todoList.filter(function(el) {return !el.completed}).length;
+    }
+        
+    addCompleteListener = () => {
+        console.log("addCompleteListener")
+        const checkBoxes = document.querySelectorAll('.taskCheckbox')
+        checkBoxes.forEach (checkBox => {
+            console.log(checkBox);
+            console.log(checkBox.parentElement.getAttribute('todoid'));
+            utilities.onTouch(checkBox, () => {
+                this.completeTodo(checkBox.parentElement.getAttribute('todoid'))
+            });
+        })
+    }
+
+    addFilterListener = () => {
+        console.log("addFilterListener")
+        const filters = document.getElementsByName('filter')
+        console.log(filters);
+        filters.forEach (filter => {
+            filter.addEventListener('change', () => {
+                console.log(filter.value);
+                this.filterTodo(filter.value);
+            });
+        })
+    }
+
+    completeTodo = (todoId) => {
+        console.log(todoId);
+        const listIndex = todoList.findIndex(todo => todo.id == todoId);
+        console.log(listIndex);
+        if(listIndex >= 0) {
+            todoList[listIndex].completed = !todoList[listIndex].completed;
+            console.log(todoList[listIndex].completed);
+            ls.writeToLS(this.key, todoList);
+            console.log(todoList);
+            this.listTodos();
+         } else {
+             console.log("Id not found in completeTodo in Todos.js");
+         }
+    }
+
+    filterTodo = (filter) => {
+        console.log(this.element);
+        console.log(filter);
+        if (filter == "all") {
+            this.listTodos();
+            return;
+        } else if (filter == "active") {
+            console.log(todoList.filter(function(el) {return !el.completed}))
+            renderTodoList(todoList.filter(function(el) {return !el.completed}), this.element);
+        } else if (filter == "complete") {
+            renderTodoList(todoList.filter(function(el) {return el.completed}), this.element);
+        } else {
+            console.log("Filter value invalid.");
+            return;
+        }
+        this.addXListener();
+        this.addCompleteListener();
+    }
 }
 
 /**
@@ -82,22 +159,24 @@ function saveTodo(task, key) {
  * @param  {array} list The list of tasks to render to HTML
  * @param {element} element The DOM element to insert our list elements into. 
  */
-function renderTodoList(list, element) {
+function renderTodoList (list, element) {
     console.log('renderTodoList');
     element.innerHTML = "";
     list.forEach((value, index) => {
         let listElement = document.createElement('li');
         listElement.classList.add('task');
-        listElement.setAttribute('todoId', value.id);
+        listElement.setAttribute('todoid', value.id);
 
         let checkBox = document.createElement('input');
         checkBox.setAttribute('type', 'checkbox');
         checkBox.classList.add('taskCheckbox');
         checkBox.setAttribute('name', 'task' + index);
+        checkBox.checked = value.completed;
 
         let label = document.createElement('label');
         label.setAttribute('for', 'task' + index);
         label.setAttribute('name', 'task' + index);
+        label.classList.add('taskCheckbox');
         label.innerHTML = value.content;
 
         let button = document.createElement('button');
@@ -110,5 +189,7 @@ function renderTodoList(list, element) {
         element.appendChild(listElement);
     });
  }
+
+
 
 export default Todos;

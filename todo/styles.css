@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Castoro&display=swap');
+
+body {
+  font-family: 'Castoro', serif;
+  background-color: rgb(235, 235, 235);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Carter One', cursive;
+}
+
 .task input[type=checkbox]:checked + label{
     text-decoration: line-through;
   }
@@ -5,7 +16,7 @@
 
 .task {
     width: 280px;
-    height: 2.2rem;
+    min-height: 2.2rem;
     border: 1px solid black;
     grid-template-columns: 0.6fr 5fr 1fr;
     display: grid;
@@ -21,6 +32,18 @@
     font-size: 2rem;
 }
 
+.xBtn:hover {
+    font-size: 2.3rem;
+    font-weight: bold;
+    color: navy;
+}
+
+.xBtn:active {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    color: blue;
+}
+
 .taskNumber {
     font-size: 0.8rem;
 }
@@ -28,6 +51,10 @@
 #todoList {
     padding: 0;
     margin: 0;
+}
+
+#todoList li:nth-of-type(1) {
+    border-radius: 5px 5px 0px 0px;
 }
 
 footer {
@@ -38,6 +65,7 @@ footer {
     width: 280px;
     height: 2.2rem;
     border: 1px solid black;
+    border-radius: 0px 0px 5px 5px;
 }
 
 footer input[type=radio] {
@@ -47,6 +75,9 @@ footer input[type=radio] {
 footer input[type=radio]:checked + label.outline-selected {
     border: 1px solid black;
     padding: 5px;
+    border-radius: 3px;
+    background-color: navy;
+    color: white;
 }
 
 #taskNumber {
@@ -86,4 +117,25 @@ footer input[type=radio]:checked + label.outline-selected {
     border-radius: 0;
     margin-left: 2px
 }
-  
+
+.taskCheckbox:hover {
+    background-color: white;
+}
+
+input[type="checkbox"]{
+    -webkit-appearance: initial;
+    appearance: initial;
+    background: white;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border: 1px black solid;
+}
+
+input[type="checkbox"]:checked:after {
+    overflow: hidden;
+    content: "X";
+    font-weight: lighter;
+    font-size: 20px;
+    padding-left: 2px;
+}

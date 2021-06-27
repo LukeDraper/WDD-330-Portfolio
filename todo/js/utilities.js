@@ -18,7 +18,7 @@ function onTouch(elementSelector, callback) {
     console.log('onTouch: ', elementSelector, callback)
     elementSelector.addEventListener('touchend', (event) => {
         console.log(event);
-        // event.stopPropagation();
+        event.stopPropagation();
         event.preventDefault();
         console.log(callback);
         callback();

@@ -11,4 +11,3 @@ addBtn.addEventListener('submit', (event) =>{
     todos.addTodo();
 });
 
-
