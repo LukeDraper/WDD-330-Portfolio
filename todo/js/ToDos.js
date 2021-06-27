@@ -162,32 +162,34 @@ function saveTodo(task, key) {
 function renderTodoList (list, element) {
     console.log('renderTodoList');
     element.innerHTML = "";
-    list.forEach((value, index) => {
-        let listElement = document.createElement('li');
-        listElement.classList.add('task');
-        listElement.setAttribute('todoid', value.id);
+    if (list) {
+        list.forEach((value, index) => {
+            let listElement = document.createElement('li');
+            listElement.classList.add('task');
+            listElement.setAttribute('todoid', value.id);
 
-        let checkBox = document.createElement('input');
-        checkBox.setAttribute('type', 'checkbox');
-        checkBox.classList.add('taskCheckbox');
-        checkBox.setAttribute('name', 'task' + index);
-        checkBox.checked = value.completed;
+            let checkBox = document.createElement('input');
+            checkBox.setAttribute('type', 'checkbox');
+            checkBox.classList.add('taskCheckbox');
+            checkBox.setAttribute('name', 'task' + index);
+            checkBox.checked = value.completed;
 
-        let label = document.createElement('label');
-        label.setAttribute('for', 'task' + index);
-        label.setAttribute('name', 'task' + index);
-        label.classList.add('taskCheckbox');
-        label.innerHTML = value.content;
+            let label = document.createElement('label');
+            label.setAttribute('for', 'task' + index);
+            label.setAttribute('name', 'task' + index);
+            label.classList.add('taskCheckbox');
+            label.innerHTML = value.content;
 
-        let button = document.createElement('button');
-        button.classList.add('xBtn');
-        button.innerHTML = 'X';
-        listElement.appendChild(checkBox);
-        listElement.appendChild(label);
-        listElement.appendChild(button);
+            let button = document.createElement('button');
+            button.classList.add('xBtn');
+            button.innerHTML = 'X';
+            listElement.appendChild(checkBox);
+            listElement.appendChild(label);
+            listElement.appendChild(button);
 
-        element.appendChild(listElement);
-    });
+            element.appendChild(listElement);
+        });
+    }
  }
 
 
