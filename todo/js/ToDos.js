@@ -60,6 +60,9 @@ class Todos {
 
     updateTaskNumDisplay = () => {
         const taskNumDisplay = document.querySelector('#taskNumber');
+        if (todoList == null) {
+            taskNumDisplay.innerHTML = 0;
+        }
         taskNumDisplay.innerHTML = todoList.filter(function(el) {return !el.completed}).length;
     }
         
@@ -149,6 +152,9 @@ function saveTodo(task, key) {
      console.log("getTodos")
      if (todoList === null) {
         todoList = ls.readFromLS(key);
+        if (todoList === null) {
+            todoList = [];
+        }
      }
      console.log(todoList);
      return todoList
