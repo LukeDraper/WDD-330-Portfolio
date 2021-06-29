@@ -45,6 +45,7 @@ class Todos {
         todoList = todoList.filter(function(el) {return el.id != todoId});
         ls.writeToLS(this.key, todoList);
         this.listTodos();
+        resetFilterDisplay();
     }
 
     
@@ -142,6 +143,22 @@ function saveTodo(task, key) {
     ls.writeToLS(key, todoList);
 }
 
+
+/**
+ * Check the filter elements of the footer and set the one that says all to checked.
+ * 
+ */
+function resetFilterDisplay() {
+    const filters = document.getElementsByName('filter')
+    const default_filter = "all";
+    filters.forEach(filter => {
+        if (filter.value === default_filter) {
+            filter.checked = true;
+        } 
+    });
+
+}
+
 /**
  * check the contents of todoList, a local variable containing a list of ToDos. 
  * If it is null then pull the list of todos from localstorage, update the local variable, and return it
@@ -149,14 +166,13 @@ function saveTodo(task, key) {
   * @return {array}     The value as an array of objects
  */
  function getTodos(key) {
-     console.log("getTodos")
      if (todoList === null) {
         todoList = ls.readFromLS(key);
         if (todoList === null) {
             todoList = [];
         }
      }
-     console.log(todoList);
+     console.log("todoList in getTodos: ", todoList);
      return todoList
   }
 
