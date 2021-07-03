@@ -1,11 +1,11 @@
 const links = [
     {
-        label: "Chapter 8: Transforms and Transitions",
-        url: "notes/ch8.html"
+        label: "MDN: Validating Forms",
+        url: "notes/validating-forms.html"
     },
     {
-        label: "Chapter 12: Testing and Debugging",
-        url: "notes/ch12.html"
+        label: "MDN: Using Fetch",
+        url: "notes/using-fetch.html"
     },
     {
         label: "Team Activity",

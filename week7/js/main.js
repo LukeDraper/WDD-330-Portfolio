@@ -1,7 +1,11 @@
 const links = [
     {
-        label: "Chapter 10: Testing and Debugging",
-        url: "notes/ch10.html"
+        label: "Chapter 11: Further Functions",
+        url: "notes/c11.html"
+    },
+    {
+        label: "Chapter 13: AJAX",
+        url: "notes/ch13.html"
     },
     {
         label: "Team Activity",

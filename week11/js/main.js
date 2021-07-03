@@ -1,15 +1,7 @@
 const links = [
     {
-        label: "Chapter 8: Transforms and Transitions",
-        url: "notes/ch8.html"
-    },
-    {
-        label: "Chapter 12: Testing and Debugging",
-        url: "notes/ch12.html"
-    },
-    {
         label: "Team Activity",
-        url: "team-activity/index.html"
+        url: "client/index.html"
     }
 ];
 

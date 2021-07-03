@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WDD 330 Portfolio</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1> WDD 330 Portfolio</h1>
+        <h2>Chapter 8: Transforms and Transitions</h2>
+        <p>CSS3 allows for animation using transform and Transitions without requiring a single line of JavaScript.</p>
+        
+
+        <h3>Transforms</h3>
+        <p>Quick facts:</p>
+        <ul>
+            <li>Transforms don't work on inline elements. Use inline-block to be able to use them on elements such as spans.</li>
+            <li>Multiple transform functions can be used in a space-separated list. Otherwise one transform will override the other.</li>
+            <li>Filters can be used to support IE 8 and earlier, but the code is ugly and performs poorly.</li>
+        </ul>
+        <h4>Translate</h4>
+        <p>Translation functions move elements without impacting the flow of the document. Translated elements are moved relative to their current position.
+            Example:
+        </p>
+        <pre>
+            transform: translate(45px, -45px);
+        </pre>
+        <p>
+            IE9 and older mobile Webkit browsers require the following vendor prefixing to make transforms work:
+        </p>
+        <pre>
+            -webkit-transform: translate(45px,-45px); /* iOS8, Android 
+            ↵4.4.3, BB10 */
+            -ms-transform: translate(45px,-45px); /* IE9 only */
+            transform: translate(45px,-45px);
+        </pre>
+        <br><br>
+            translateX() and translateY() are axis-specific versions of the function.
+
+        <h4>Scaling</h4>
+        <p>
+            The scale(x,y) function scales an element both horzontally or vertically.
+            It's dimensions are multiply by the provided values. If only one value is provided then it will
+            be used for both horizontal and vertical values. One value will scale. Two different values will distort.
+            Values with an absolute value less than one will make the element slower.
+            <br><br>
+            Scaling has no impact on document flow, so text will not account for it by reflowing.
+            <br><br>
+            scaleX() and scaleY() are axis-specific versions of the function.
+        </p>
+
+        <h4>Rotation</h4>
+        <p>
+            rotate() function rotates an element around the point of origin by a specified angle value. 
+            Default point of origin is always center. Positive degrees results in a clockwise rotation, while
+            negative degrees result in a counterclockwise rotation.
+        </p>
+
+        <h4>Skew</h4>
+        <p>
+            skew() works like rotate, but instead cause a skew to be applied.
+            <br><br>
+            skewX() and skewY() are axis-specific versions of the function.
+        </p>
+
+        <h4>Changing the origin of the Transform</h4>
+        <p>
+            The transform-origin property can be used to change the point of origin from which the transforms are applied.
+            It has the same syntax as the background-position property. The default value is 50% 50% which is center. Values like 
+            top center or other percentage values can also be supplied.
+        </p>
+
+        <h4>Order Matters</h4>
+        <p>
+            The order of transform functions is important because they have an effect on each other. Rotate also rotates the axis that 
+            translate uses to move, so it is important to take that into account to put things where you want them.
+        </p>
+
+        <h3>Animations</h3>
+
+       
+    </body>
+</html>

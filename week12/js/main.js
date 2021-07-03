@@ -1,11 +1,11 @@
 const links = [
     {
-        label: "Chapter 8: Transforms and Transitions",
-        url: "notes/ch8.html"
+        label: "Chapter 9: The Window Object",
+        url: "notes/ch9.html"
     },
     {
-        label: "Chapter 12: Testing and Debugging",
-        url: "notes/ch12.html"
+        label: "Chapter 14: HTML5 APIs",
+        url: "notes/ch9.html"
     },
     {
         label: "Team Activity",
