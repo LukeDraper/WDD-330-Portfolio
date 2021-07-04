@@ -8,5 +8,85 @@
     <body>
         <h1> WDD 330 Portfolio</h1>
         <h2>Chapter 11: Further Functions</h2>
+        <p>Because functions are first-class objects in JavaScript they can be passed as callback functions. This cancause code to become overly complicated.</p>
+        <h3>Quick Facts</h3>
+        <ul>
+          <li>All functions have a length property that return the number of functions they have.</li>
+          <li>
+            Custom properties can be added to any array in JavaScript.
+          </li>
+        </ul>
+        <h3> call() and apply() methods</h3>
+        <p>
+          The call() function is called from another function and it accepts an object that is used to set the value of this within the function. If called without an object then the first argument should be null while the second argument should be a value to be passed into the function. <br />
+          Example:
+          <pre>
+function sayHello(){
+    return `Hello, my name is ${ this.name }`;
+}
+
+const clark = { name: 'Clark' };
+const bruce = { name: 'Bruce' };
+sayHello.call(clark);
+<< 'Hello, my name is Clarke'
+sayHello.call(bruce);
+<< 'Hello, my name is Bruce'
+          </pre>
+          
+          <br/>
+          The apply() function works the same as call(), but the arguments must be passed as an array. Good for if you are alraady using an array.
+        </p>
+        <h3>Memoization</h3>
+        <p>
+          Because properties can be stored in functions, results for costly functions can be cached to return them faster. 
+          
+          <pre>
+            function square(x){
+    square.cache = square.cache || {};
+    if (!square.cache[x]) {
+        square.cache[x] = x*x;
+    }
+    return square.cache[x]
+}
+If we try calling the function a few times, we can see that the cache object stores the results:
+
+square(3);
+<< 9
+square(-11);
+<< 121
+square.cache;
+<< {"3": 9, "-11": 121}
+          </pre>
+        </p>
+        
+        <h3>Immediately Invoked Function Expressions(IIFE)</h3>
+        <p>
+          IIFEs arefunctions that are called as soon as they are declared. This avoids cluttering the namespace with the variables contained in the function. Call it once and forget it.
+          <pre>
+            (function(){
+const temp = 'World';
+console.log(`Hello ${temp}`);
+})();
+<< 'Hello World'
+          </pre>
+          
+          Any variables used inside and IIFE can be considered temporary variables.
+          <br />Example:
+          <pre>
+            let a = 1;
+let b = 2;
+(()=>{
+    const temp = a;
+    a = b;
+    b = temp;
+})();
+a;
+<< 2
+b;
+<< 1
+console.log(temp);
+<< Error: "temp is not defined"
+          </pre>
+        </p>
     </body>
 </html>
