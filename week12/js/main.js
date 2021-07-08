@@ -1,13 +1,5 @@
 const links = [
     {
-        label: "Chapter 9: The Window Object",
-        url: "notes/ch9.html"
-    },
-    {
-        label: "Chapter 14: HTML5 APIs",
-        url: "notes/ch9.html"
-    },
-    {
         label: "Team Activity",
         url: "team-activity/index.html"
     }

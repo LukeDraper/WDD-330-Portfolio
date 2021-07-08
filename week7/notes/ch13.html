@@ -8,5 +8,218 @@
     <body>
         <h1> WDD 330 Portfolio</h1>
         <h2>Chapter 13: AJAX</h2>
+        <p>JavaScript as a client-side scripting language uses AJAX to asynchronously request data from the server. This data is usually snippets of html 
+            or text. It used to used the XMLHttpRequest object, but that has since been replaced by the fetch api.
+        </p>
+        <h3>
+            Fetch API
+        </h3>
+        <p>
+            Fetch only has one mandatory argument: the URL of the resource you need. Here's the structure of using fetch:
+            <pre>
+                const url = 'https:example.com/data';
+                fetch(url)
+                .then((response) => {
+                    if(response.ok) {
+                        return response;
+                    }
+                    throw Error(response.statusText);
+                })
+                .then( response => // do something with response )
+                .catch( error => console.log('There was an error!') )
+            </pre>
+            The response object needs to be checked because there could be a 404 error or some other kind. A network error will be result 
+            in a broken promise, but the promise is successful if the destination returns a response. The response object has some properties including:
+            <ul>
+                <li>statusText: specifies the status message that corresponds to the code returned.</li>
+                <li>headers: A Headers object containing any headers associated with the response.</li>
+                <li>url: A string containing the url of the response.</li>
+                <li>redirected: a boolean value that specifies if the response if the result of a redirect.</li>
+                <li>type: A string value of 'basic', 'cors', 'error', or 'opaque'
+                    <ul>
+                        <li>'basic' means response is the from the same domain.</li>
+                        <li>'cors' means data was received from a valid cross-origin request from a different domain.</li>
+                        <li>'opaque' is used for a 'no-cors' request from another domain, so access to the data will be severely restricted.</li>
+                        <li>'error' used for when a network error occurs.</li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
+
+        <h4>Redirects ---- Not supported by any browser at this time.</h4>
+        <p>
+            The redirect() method can be used to redirect to another URL. It creates a new promise that resolves to the response from the redirected URL.
+            <pre>
+                fetch(url)
+                .then( response => response.redirect(newURL)); // redirects to another URL
+                .then( // do something else )
+                .catch( error => console.log('There was an error: ', error))
+            </pre>
+        </p>
+
+        <h4>Text Responses</h4>
+        <p>
+            text() method called from the response like response.text(). It takes a stream of text from the response, reads it, and 
+            returns a promise that resolves to a USVSting object that JavaScript can treat as a string.
+        </p>
+
+        <h4>File Responses</h4>
+        <p>
+            The blob() method is used to read a file of raw data, such as an image or a spreadsheet. Once it has read the whole file, it returns a promise that resolves with a blob object.
+            <pre>
+                fetch(url)
+                .then( response => response.blob() ); // transforms the data into a blob object
+                .then( blob => console.log(blob.type) )
+                .catch( error => console.log('There was an error: ', error))
+            </pre>
+            The blob() method returns a blob object, and the type of that object is logged in the example.
+        </p>
+
+        <h4>JSON Responses</h4>
+        <p>
+            JSON is probably the most common format for AJAX responses. The json() method converts the JSON data to a javascript object.
+            The Object.entries() method can be used to view the key and value pairs in the object.
+            <pre>
+                fetch(url)
+                .then( response => response.json() ); // transforms the JSON data into a JavaScript object
+                .then( data => console.log(Object.entries(data)) )
+                .catch( error => console.log('There was an error: ', error))
+            </pre>
+        </p>
+
+        <h4>Creating Response Objects</h4>
+        <p>
+            You can create your own response objects with the following syntax:
+            <pre>
+                const response = new Response( 'Hello!', {
+                    ok: true,
+                    status: 200,
+                    statusText: 'OK',
+                    type: 'cors',
+                    url: '/api'
+                });
+            </pre>
+            The first argument is the data to be returned and the second can specify values for properties of the response object.
+            
+        </p>
+
+        <h4>
+            Request Objects
+        </h4>
+        <p>
+            Request objects can be created to give more control over the request. 
+            Example:
+            <pre>
+                const request = new Request('https://example.com/data', {
+                    method: 'GET',
+                    mode: 'cors',
+                    redirect: 'follow',
+                    cache: 'no-cache'
+                });
+            </pre>
+        </p>
+
+        <h4>
+            Headers Interface
+        </h4>
+        <p>
+            HTTP Headers are used to pass additional information about a request or response. Headers most often contain 
+            the file-type of the resource, cookie information, and when the resource was last modified.
+            <pre>
+                const headers = new Headers({ 'Content-Type': 'text/plain', 'Accept-Charset' : 'utf-8', 'Accept-Encoding':'gzip,deflate' })
+            </pre>
+        </p>
+        
+        <h3>Putting Headers, requests, and reponse objects together</h3>
+        <p>
+            <pre>
+                const url = 'https:example.com/data';
+                const headers = new Headers({ 'Content-Type': 'text/plain', 'Accept-Charset' : 'utf-8', 'Accept-Encoding':'gzip,deflate' })
+                const request = (url,{
+                    headers: headers
+                })
+                fetch(request)
+                .then( function(response) {
+                    if(response.ok) {
+                        return response;
+                    }
+                    throw Error(response.statusText);
+                })
+                .then( response => // do something with response )
+                .catch( error => console.log('There was an error!') )
+            </pre>
+        </p>
+
+        <h4>Sending Information</h4>
+        <p>
+            <ul>When sending information to a database you need to use a POST request.</ul>
+            
+            Form objects have properties of action and method that can be used to create an AJAX request.
+            <pre>
+                const request = new Request(form.action,
+                {
+                    method: form.method,
+                    header: headers,
+                    body: data
+                }
+                )
+            </pre>
+        </p>
+
+        <h4>FOrmData</h4>
+        <p>
+            The fetch api has the FormData interface to make it easier to submit information in forms using AJAX.
+            <pre>
+                const form = document.forms['todo'];
+                
+                form.addEventListener('submit', addTask, false);
+
+                function addTask(event) {
+                    event.preventDefault();
+                    const task = new FormData(form);
+                    const url = `http://echo.jsontest.com/id/1/title/${form.task.value}`;
+                    const headers = new Headers({
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    });
+                    const request = new Request(url,
+                    {
+                        method: 'POST',
+                        mode: 'cors',
+                        header: headers,
+                        body: JSON.stringify(task)
+                    }
+                    )
+
+                    fetch(request)
+                    .then( response => response.json() )
+                    .then( data => console.log(`${data.title} saved with an id of ${data.id}`) )
+                    .catch( error => console.log('There was an error:', error))
+                }
+            </pre>
+            FormData creates the task object. It also automatically creates the necessary settings required to handle 
+            files. Use FormData if files are accepted through the form because it's difficult or may require third-party libraries.
+            <br><br>
+
+            Data can be added to the form data instance as key-value pairs using the append() method:
+            <pre>
+                data = new FormData(); // no form provided as an argument creates an empty form data instance
+                data.append('height', 75);
+            </pre>
+        </p>
+
+        <h3>
+            A Living Standard
+        </h3>
+        <p>
+            The Fetch API is currently a "living standard", meaning that development is currently ongoing. It's available to use,
+            but it may change as feedback is provided by its users. Living standards tend to be pretty stable, especially in the case of 
+            Fetch which has been implemented in almost all current browsers. 
+            <br><br>
+            Libraries that take care of Ajax requests may use the most up-to-date methods, taking care of the changes to standards for you.
+            jQuery for example has a generic ajax() method that can be used like the fetch() method.
+        </p>
+
+
     </body>
 </html>

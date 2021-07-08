@@ -52,7 +52,7 @@ export default class QuakesController {
     // render the list to html
     this.quakesView.renderQuakeList(quakeList, this.parentElement);
     // add a listener to the new list of quakes to allow drill down in to the details
-    this.parentElement.addEventListener('touchend', e => {
+    this.parentElement.addEventListener('click', e => {
         console.log(e.target.tagName);
         if (e.target.tagName.toLowerCase() == 'li') {     
             this.getQuakeDetails(e.target.dataset.id);
@@ -66,7 +66,7 @@ export default class QuakesController {
     const quake = await this.quakes.getQuakeById(quakeId);
     this.quakesView.renderQuake(quake, this.parentElement);
     const backButton = document.querySelector('#backBtn');
-    backButton.addEventListener('touchend', e => {
+    backButton.addEventListener('click', e => {
         this.getQuakesByRadius();
     });
   }

@@ -8,6 +8,14 @@ const links = [
         url: "notes/ch13.html"
     },
     {
+        label: "AJAX Examples: Facts APIs",
+        url: "notes/ajax.html"
+    },
+    {
+        label: "AJAX Examples: Todo List",
+        url: "notes/todo/todo.html"
+    },
+    {
         label: "Team Activity",
         url: "team-activity/index.html"
     }
