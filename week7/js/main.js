@@ -1,7 +1,7 @@
 const links = [
     {
         label: "Chapter 11: Further Functions",
-        url: "notes/c11.html"
+        url: "notes/ch11.html"
     },
     {
         label: "Chapter 13: AJAX",
