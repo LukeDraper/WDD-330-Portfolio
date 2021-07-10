@@ -8,5 +8,62 @@
     <body>
         <h1> WDD 330 Portfolio</h1>
         <h2>Chapter 9: The Window Object</h2>
+        <h3>The Browser Object Model</h3>
+        <p>
+            The Browser Object Model (BOM) is a collection of properties and methods that contain information about the 
+            browser and computer screen. 
+        </p>
+        <h4>The Window As the Global Object</h4>
+        <p>
+            In a browser environment global variables are properties of the window object. So window.x is the same 
+            as calling the global variable x. Usually you shouldn't refer to global variables using the window object.
+            Some methods like parseInt() and isNaN are methods of the global object. 
+        </p>
+
+        <h4>Dialogs</h4>
+        <p>
+            Three functions that produce dialogs in browsers: alert(), confirm() and prompt() they are not part of the ECMAScript 
+            standard, but all major browsers support them as methods of the window object.
+            <ul>
+                <li>window.alert() pauses execution of the program and displays a message in a dialog box. The message is provided as an argument 
+                    to the message and undefined is always returned.
+                </li>
+                <li>
+                    window.confirm() stops execution of the program and displays a confirmation dialog that shows the message provided as an argument 
+                    and giving options of OK or Cancel. It returns a boolean value of true if the user clicks OK and false if the user clicks cancel.
+
+                </li>
+                <li>
+                    window.prompt() stops execution of the program, and shows a dialog with the message provided as an argument. There is an input field for 
+                    the user to enter text. This text is returned if OK is clicked, and null is returned if Cancel is clicked.
+                </li>
+            </ul>
+            These methods can cause problems if the program needs to process something or is waiting for a callback function because it stops 
+            processing when it is called. Browsers also allow users to keep these from popping up, so you can't rely on them. 
+            But it may be good for double-checking if a user wants to delete a resource or they need to know that a decision needs to be made.
+        </p>
+
+        <h4>Browser Information</h4>
+        <p>
+            window.navigator property returns a reference to the navigator Object, which contains information about the browser being used.
+            window.navigator.userAgent property returns information about the browser and operating system used. This is not necessarily reliable
+            because the user can modify it to masquerade as a different browser.
+        </p>
+
+        <h5>Location Properties</h5>
+        <p>
+            window.location property is an object that contains information about the URL of the current page. Differenet properties 
+            provide information about different fragments of the URL.
+            <ul>
+                <li>window.location.href returns the full URL as a string. It is a read/write property, and if changed the page will be reloaded 
+                    with the new property. So it can be used to redirect.
+                </li>
+
+                <li>
+                    window.location.protocol 
+                </li>
+            </ul>
+        </p>
+
     </body>
 </html>
