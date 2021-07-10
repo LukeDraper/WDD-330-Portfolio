@@ -1,0 +1,103 @@
+@keyframes moveRight { 
+    from {
+    transform: translateX(-50%);
+    }
+    to {
+    transform: translateX(50%);
+    }
+}
+@keyframes appearDisappear { 
+    0%, 100% {
+    opacity: 0;
+    }
+    20%, 80% {
+    opacity: 1;
+    }
+}
+@keyframes bgMove {
+    100% {
+    background-position: 120% 0;
+    }
+}
+
+body {
+    margin: 0 auto;
+    padding: 1rem 5rem 3rem 5rem;
+    max-width: 1200px;
+    border: #3a3a3a 3px solid;
+    background-color: whitesmoke;
+}
+
+html {
+    background-color: honeydew;
+}
+
+h1, h2, h3, h4, h4, h5, h6 {
+    color: rgb(14, 94, 197)
+}
+
+p {
+    text-indent: 1rem;
+}
+
+.skewed {
+    transform: skew(15deg, 4deg);
+}
+
+
+.scale:hover, .scaled{
+    color: rgb(63, 4, 63);
+    transform-origin: left;
+    transform: scale(2);
+}
+
+.translate:hover {
+    transform: translate(45px, -45px);
+    padding: 2rem
+}
+
+.transition-example {
+    margin: 2rem;
+    height: 150px;
+    width: 200px;
+    border: red solid 5px;
+    background-color: honeydew;
+    padding: 1rem;
+    border-radius: 0px;
+    -webkit-transition-property: -webkit-transform, border-color, border-radius;    
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing-function: cubic-bezier(0.1, .5, .75, .8);
+    -webkit-transition-delay: 50ms;
+    transition-property: transform, border-color;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.1, .5, .75, .8);
+    transition-delay: 50ms;
+
+}
+
+.transition-example:hover {
+    
+    transform: rotate(180deg);
+    border-color: blue;
+    border-radius: 20px;
+}
+
+.animation-example {
+    margin: 2rem;
+    height: 150px;
+    width: 200px;
+    border: rgb(2, 36, 226) solid 5px;
+    background-color: honeydew;
+    padding: 1rem;
+    border-radius: 0px;
+    -webkit-animation-name: appearDisappear;
+    animation-name: appearDisappear;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}

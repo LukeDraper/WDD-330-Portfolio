@@ -4,7 +4,7 @@ const links = [
         url: "notes/ch8.html"
     },
     {
-        label: "Chapter 12: Testing and Debugging",
+        label: "Chapter 12: Canvas, SVG, and Drag and Drop",
         url: "notes/ch12.html"
     },
     {

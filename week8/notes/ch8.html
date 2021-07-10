@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WDD 330 Portfolio</title>
-        <link rel="stylesheet" href="/css/notes.css" />
+        <link rel="stylesheet" href="ch8.css" />
     </head>
     <body>
         <h1> WDD 330 Portfolio</h1>
@@ -18,11 +18,12 @@
             <li>Multiple transform functions can be used in a space-separated list. Otherwise one transform will override the other.</li>
             <li>Filters can be used to support IE 8 and earlier, but the code is ugly and performs poorly.</li>
         </ul>
-        <h4>Translate</h4>
+        
+        <h4 class="translate">Translate</h4>
         <p>Translation functions move elements without impacting the flow of the document. Translated elements are moved relative to their current position.
             Example:
         </p>
-        <pre>
+        <pre class="translate">
             transform: translate(45px, -45px);
         </pre>
         <p>
@@ -36,8 +37,10 @@
         </pre>
         <br><br>
             translateX() and translateY() are axis-specific versions of the function.
+        <br><br>
+        <br>
+        <h4 class="scaled">Scaling</h4>
 
-        <h4>Scaling</h4>
         <p>
             The scale(x,y) function scales an element both horzontally or vertically.
             It's dimensions are multiply by the provided values. If only one value is provided then it will
@@ -47,6 +50,7 @@
             Scaling has no impact on document flow, so text will not account for it by reflowing.
             <br><br>
             scaleX() and scaleY() are axis-specific versions of the function.
+            <h4 class='scale'>This element gets transform: scale(3, 0.75) translate(5, 0); on hover.</h4>
         </p>
 
         <h4>Rotation</h4>
@@ -55,8 +59,8 @@
             Default point of origin is always center. Positive degrees results in a clockwise rotation, while
             negative degrees result in a counterclockwise rotation.
         </p>
-
         <h4>Skew</h4>
+        <h4 class="skewed">Skewed Heading is after the "Skew" heading in html.</h4>
         <p>
             skew() works like rotate, but instead cause a skew to be applied.
             <br><br>
@@ -76,7 +80,193 @@
             translate uses to move, so it is important to take that into account to put things where you want them.
         </p>
 
-        <h3>Animations</h3>
+        <h3>Transitions</h3>
+        <p>
+            CSS transitions require very little client side processing, so they work well for even mobile devices.
+            They essentially allow CSS properties to change over time allowing for simple animation.
+            <br>
+            Steps to create a simple transition with only CSS:
+            <ol>
+                <li>Declare the original state of the element in the default style declaration.</li>
+                <li>Declare the final state of your transitioned element; for example, a :hover state.</li>
+                <li>Include the transition functions in your default style declaration using the transition properties, including: transition-property , transition-duration , transition-timing-function , and transition-delay . We’ll look at each of these and how they work shortly.</li>
+            </ol>
+            The -webkit- vendor prefix is still need for older mobile devices.
+
+            <br><br>
+            <h4>Transition Properties</h4>
+            <ul>
+                <li>transition-property defines the CSS properties of the element that should be transition. Default is all. Multiple items should be comma separated.
+                    <pre>
+                        .ad-ad2 h1 span {
+                            -webkit-transition-property: -webkit-transform, color;
+                            transition-property: transform, color;
+                        }
+                    </pre>
+                </li>
+                <li>transition-duration property is the duration of time to go from default state to the transitioned state. 
+                    This can either be specified in seconds (s) or milliseconds (ms). 200ms or 0.2s is considered to be the optimum
+                    time for a transition. Slower is annoying, faster doesn't won't be a noticeable animation.
+                </li>
+                <li>transition-timing-function controls the pace of the transition. Linear is default, but ther is also ease, ease-in, ease-out, or ease-in-out.
+                    These all change the pacing of the transition. ease starts slow, speeds up, and ends slowly.
+                    <br><br>
+                    The cubic-bezier function lets you define your own timing function. Linear is the same as cubic-bezier(0, 0, 1, 1). The following explanation oversimplifies the function. More calculus needed.
+                    The website <a href='http://cubic-bezier.com/'>http://cubic-bezier.com/</a> demonstrates how the 4 numbers in the function works like two pairs of 
+                    points in a 1 by 1 graph where x is the time and y is the progress to the transition's completion. These points modify a line on that graph to curve such that the 
+                    way the line progresses to the end changes. The default timing functions all stay within the graph, but some interesting timing functions can result 
+                    from larger or negative numbers in the y dimension. Messing with the x dimension of the timing function seems to break it maybe.
+
+                    <a href="http://estelle.github.io/animation/files/cubicbezierprint.html">http://estelle.github.io/animation/files/cubicbezierprint.html</a>
+
+                </li>
+                <li>transition-delay property accepts a delay specified in seconds s or milliseconds ms. 
+                    This is the delay from when the transition is triggered to when it starts. Negative delay will start the transition Immediately,
+                    but it will jump through according to the amount of time in the negative transition. At the end of the transition when it starts to transition back 
+                    to the start it will jump again.
+                </li>
+                <li>transition shorthand property takes the other 4 properties in one. 
+                    <pre>
+                        .ad-ad2 h1 span {
+                            transition: transform 0.2s ease-out 50ms;
+                        }
+                    </pre>
+                    They can be in any order except if delay is included a duration needs to be as well, and duration needs to come before delay.
+                </li>
+
+            </ul>
+
+        </p>
+         <h4>
+             Multiple Transitions
+         </h4>
+         <p>
+             Multiple transitions can happen in one call. The propertys to be transitioned all need to be included in the transition-property property. 
+             Different transition values can be applied to each one by comma-separating the values in the same order.
+             <pre>
+                transition-property: transform, color; 
+                transition-duration: 0.2s, 0.1s;  
+                transition-timing-function: ease-out, linear;
+                transition-delay: 50ms;
+             </pre>
+             The transition shorthand property can accept a comma-separated list of shorthand:
+             <pre>
+                transition: transform 0.2s ease-out 50ms, color 0.1s linear 50ms;
+             </pre>
+
+             If the all keyword is used then the transitions will use the same properties.
+             <br><br>
+             A transitionend event will fire for each property at the end of their transition.
+
+         </p>
+
+         <div class='transition-example'>
+            <h2>Here's an example of a transition</h2>
+            <p>
+                We can use this little block to show it off. Hover to see it.
+            </p>
+        </div>
+
+         <h3>Animations</h3>
+         <p>
+             CSS animations let you control each step of the animation using keyframes.
+             CSS animations are lightweight. Good for simple-state changes on mobile. Intricate, stateful UIs should 
+             use a JavaScript animation library for manageability and performance.
+         </p>
+
+         <h4>Keyframes</h4>
+         <p>
+             To animate in CSS you create a named animation and then attach it to an element in that elemnts's 
+             property declaration block.
+             <pre>
+                @-webkit-keyframes myAnimation { 
+                    /* put animation keyframes here */
+                }
+                @keyframes myAnimation { 
+                    /* put animation keyframes here */
+                }
+             </pre>
+             Each keyframe is like a nexted CSS declaration block, but htey use percentage values that may or may not be in a comma-separated list.
+             There are to keyterms - from and to - which evaluate to 0% and 100% respectively.
+             The properties you want to animate are to be put inside each keyframe with the animated values. They will be smoothly interpolated by the 
+             browser's animation engine between each keyframe.
+         </p>
+
+         <h4>Animation Properties</h4>
+         <p>
+             Animation properties also need a second declaration with the webkit prefix to support webkit browsers. 
+             <ul>
+                <li>animation-name property attaches an animation that has been defined and named using the @keyframes syntax.</li>
+                <li>animation-duration specifies duration in seconds or milliseconds.</li>
+                <li>animation-timing-function determines how the animation will progress over its duration. The options are the same as for 
+                    transition-timing-function : ease , linear , ease-in , ease-out , ease-in-out ,
+                     a developer-defined cubic-bezier() function, step-start , step-end , or a developer-defined number of steps with the steps(number, direction) function.</li>
+                <li>animation-iteration-count: the number of times that the animation will play through. Defaults to 1. 
+                    infinite can be used as a values. Values with a decimal will cause the animation to stop partway through.
+                </li>
+                <li>
+                    animation-direction: normal; is the default value for animation direction. This means it goes from 0% to 100% before jumping back to 0% to start again. 
+                    The reverse values takes that from 100% to 0%. alternate will do normal and then reverse alternately without jumping around. alternate-reverse is like 
+                    alternate, but it starts with reverse.
+                </li>
+                <li>
+                    animation-delay the wait before the animation begins.
+                </li>
+                <li>
+                    animation-fill-mode determies what happens before the first animation begins and after the last one ends.
+                    <ul>
+                        <li>default value is none.</li>
+                        <li>backwards has it wait on the first keyframe until the end of the animation delay.</li>
+                        <li>forwards has it wait on the last keyframe.</li>
+                        <li>both applies forwards and backwards</li>
+                    </ul>
+                </li>
+                <li>
+                    animation-play-state property defines whether the animation is running or paused. 
+                    This allows a simple way to control CSS animations from CSS or Javascript.
+                </li>
+                <br>
+                <li>Shorthand animation property 
+                    <pre>
+                        .verbose {
+                            animation-name: appearDisappear; 
+                            animation-duration: 300ms; 
+                            animation-timing-function: ease-in;
+                            animation-iteration-count: 1;
+                            animation-direction: alternate;
+                            animation-delay: 5s;
+                            animation-fill-mode: backwards;
+                            animation-play-state: running;
+                        }
+                        /* shorthand */
+                        .concise {
+                            animation: 300ms ease-in alternate 5s backwards appearDisappear;
+                        }
+                    </pre>
+                    Note that in the shorthand version, we’ve left out the animation-iteration-count and animation-play-state since both were set to default.
+                    <br><br>
+                    If using the shorthand property, be careful with your animation-name . You want to avoid accidentally using any animation property key term such as forwards , running , or alternate.
+                    
+                </li>
+             </ul>
+
+             Multiple animations on an element are declared in the animation shortand by including a grouping for each animation name. Each 
+             grouping is comma-separated.
+             <pre>
+                .target {
+                    animation: 
+                    animationOne 300ms ease-in backwards, 
+                    animationTwo 600ms ease-out 1s forwards;
+                }
+             </pre>
+         </p>
+
+        <div class='animation-example'>
+            <h2>Here's an example of a animation</h2>
+            <p>
+                We can use this little block to show it off. It'll disappear and reappear.
+            </p>
+        </div>
 
        
     </body>

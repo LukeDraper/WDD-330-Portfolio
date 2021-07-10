@@ -8,6 +8,8 @@ body {
 
 html {
     background-color: honeydew;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 h1, h2, h3, h4, h4, h5, h6 {
@@ -16,4 +18,24 @@ h1, h2, h3, h4, h4, h5, h6 {
 
 p {
     text-indent: 1rem;
+}
+
+.myCanvas {
+    border: dotted 2px black;
+    margin: 0 20px;
+}
+
+svg {
+    max-height: 200px;
+    max-width: 500px;
+}
+
+.spin {
+    position: absolute;
+    top: 8px;
+    left: 55px;
+}
+
+.draganddrop .mc {
+    text-align: center; 
 }

@@ -3,10 +3,300 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WDD 330 Portfolio</title>
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="ch12.css" />
     </head>
     <body>
         <h1> WDD 330 Portfolio</h1>
         <h2>Chapter 12: Canvas, SVG, and Drag and Drop</h2>
+        <h3>HTML5's Canvas API</h3>
+        <p>
+            Using canvas we can draw all sorts of things and avoid the need to download hefty images. The canvas HTML element's 
+            inner text only shows up if canvas is not supported by the browser.  Canvas also has a height and width attributed that must
+            be set in html. 
+            <br><br>
+            Once the canvas is set up we do all of the drawing in JavaScript after getting the element from the document. We will then get the context
+            which will be in the Cavas RenderingContext2D interface. 
+            <pre>
+                var canvas = document.getElementById("myCanvas");
+                var context = canvas.getContext("2d");
+            </pre>
+
+            To do 3d graphics you can use the WebGL API.
+            
+        </p>
+        <h4>Filling Brush with Color</h4>
+        <p>
+            To draw with color you need to set the context's strokeStyle or fillStyle properties with either a string representing a color,
+            a CanvasGradient object, or a CanvasPattern object. The color can also use hexadecimal values, rgb, or rgba values.
+            The following code will allow for a blue rectangle with a red outline to be drawn:
+            <pre>
+                var canvas = document.getElementById("myCanvas");     
+                var context = canvas.getContext("2d");
+                context.strokeStyle = "red";
+                context.fillStyle = "rgba(0, 0, 255, 0.5)";
+            </pre>
+        </p>
+        <canvas id="myCanvas1" class="myCanvas" width="200" height="200">
+            Sorry! Your browser doesn’t support Canvas.
+        </canvas>
+
+        <h4>fillStyle with a CanvasPattern</h4>
+        <p>
+            We can use a CanvasPattern in our fillStyle by using the createPattern method with an image.
+            createPattern accepts two parameters: an image and how the image should be repeated as a string value.
+            When setting the image src attribute you should set an onload event handler to create the pattern and fill it 
+            after the image is ready for use or it may cause errors. The results of createPattern can then be stored in a 
+            variable to by passed to fillStyle.
+        </p>
+        <pre>
+            function drawPattern() {
+                var canvas = document.getElementById("demo2");
+                var context = canvas.getContext("2d");
+                context.strokeStyle = "red";
+                
+                var img = new Image();
+                img.src = "../images/bg-bike.png";
+                img.onload = function() { 
+                    
+                var pattern = context.createPattern(img, "repeat"); 
+                context.fillStyle = pattern;                        
+                context.fillRect(10, 10, 100, 100);                  
+                context.strokeRect(10, 10, 100, 100);    
+                };            
+            }  
+        </pre>
+        
+        <canvas id="demo2" class="myCanvas" width="200" height="200">
+            Sorry! Your browser doesn’t support Canvas.
+        </canvas>
+
+        <h4>
+            fillStyle with CanvasGradient
+        </h4>
+        <p>
+            There are 2 methods that can create a CanvasGradient object. createLinearGradient() or createRadialGradient()
+            createLinearGradient(x0, y0, x1, y1) x0 and y0 represent the starting location of the gradient. x1 and y1 
+            represent the ending location.
+            <br><br>
+            Once the gradient is created we use gradient.addColorStop(offset, color). The color in the function works just like the 
+            colors previously. The offset is a value from 0 to 1. To make a gradient that starts as blue and begins to blend into white
+             halfway down the gradient, we can specify a blue color stop with an offset of 0 and a white color stop with an offset of 1. 
+             The color stop sets where in the gradient it will be a particular color, so between color stops it will bleed into the colors 
+             of the stops on either side.
+        </p>
+
+        <canvas id="demo3" class="myCanvas" width="200" height="200">
+            Sorry! Your browser doesn’t support Canvas.
+        </canvas>
+
+        <h4>Drawing Other Shapes by Creating Paths</h4>
+        <p>
+            Any shape can be drawn in canvas by laying out the path of the shape. Paths are invisible until 
+            they have a stroke or fill. The 3 steps for any shape is to lay out the path, stroke the path, and fill the path.
+            To draw a circle you use the arc method and set the angles to draw a full circle.
+            The signature for the arc method is: arc(x, y, radius, startAngle, endAngle, anticlockwise) .
+            x and y set where the arc's path begins.
+            <br><br>
+            Angles in the arc() method are measured in radians.
+            <br><br>
+            Rather than fillRect and strokeRect just the fill() and stroke methods are used.
+        </p>
+
+        <canvas id="myCanvas2" class="myCanvas" width="200" height="200">
+            Sorry! Your browser doesn’t support Canvas.
+        </canvas>
+
+        <h4>Saving Canvas Drawings</h4>
+        <p>
+            To save a canvas drawing you can use the toDataURL function to open a new window with the image in it where you can right click 
+            and use "save image as".
+        </p>
+
+        <h2>Demo 5: Saving canvas drawings</h2>
+        <canvas width="200" height="200" id="demo5" class="myCanvas">
+            Sorry! Your browser doesn't support Canvas.
+        </canvas>
+        <br>
+        <button name="saveButton" id="saveButton">Save Drawing</button>
+
+        <h4>Drawing image to Canvas</h4>
+        <p>
+            The drawImage() function can be called on the context. It accepts an image and 
+            an x and y coordinates to position the image.
+        </p>
+
+        <h2>Demo 6: Drawing an image to the canvas</h2>
+        <canvas width="200" height="200" id="demo6" class="myCanvas">
+            Sorry! Your browser doesn't support Canvas.
+        </canvas>
+        <img src="pikachu.jpg" id="myImageElem">
+
+        <h4>Image Manipulation with Canvas</h4>
+        <p>
+            getImageData method from the canvas api can be used to manipluate the pixels of the image.
+            It returns an ImageData object, which has width, height, and data properties. The data property 
+            contains an array of pixels that have 4 values each (rgba) that determine the color and opacity.
+        </p>
+
+        <h4>Converting a Color Image to Black and White</h4>
+        <p>
+            To convert an image to black and white, we can use a for loop to iterate through each pixel and convert it to grayscale.
+        </p>
+
+        <h2>Demo 7: Changing Color to Black and White</h2>
+        <canvas width="200" height="200" id="demo7" class="myCanvas">
+            Sorry! Your browser doesn't support Canvas.
+        </canvas>
+        <img src="pikachu.jpg" id="secondImage">
+
+        <h4>Converting Video to Black and White With Canvas</h4>
+        <p>
+            Converting a video to grayscale works by first creating functions that accept the video element, context, and canvas. 
+            While the video is playing, these are used to convert each frame of the video to grayscale and then output it to a canvas overlay.
+
+            This code improves performance by not using imageData.data. Instead the data property is put into a pixelData variable. This saves on 
+            performance because property lookups become more costly when they are down as many times is needed for the video.
+            <pre>
+                function makeVideoOldTimey() {
+                    var video = document.getElementById("video");
+                    var canvas = document.getElementById("canvasOverlay");
+                    var context = canvas.getContext("2d");
+                    video.addEventListener("play", function() { 
+                    draw(video,context,canvas);               
+                    }, false);  
+                }
+
+                function draw(video, context, canvas) {
+                    if (video.paused || video.ended) return false;
+                    
+                    drawOneFrame(video, context, canvas);
+                }
+
+                function drawOneFrame(video, context, canvas){
+                    // draw the video onto the canvas
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    var imageData = context.getImageData(0, 0, canvas.width, 
+                ↵canvas.height);
+                    var pixelData = imageData.data; 
+                    // Loop through the red, green and blue pixels, 
+                    // turning them grayscale
+                    
+                    var red, green, blue, greyscale;  
+                    for (var i = 0; i < pixelData.length; i += 4) {
+                    red = pixelData[i];
+                    green = pixelData[i + 1];
+                    blue = pixelData[i + 2];
+                    //we'll ignore the alpha value, which is in position i+3
+                        
+                    grayscale = red * 0.3 + green * 0.59 + blue * 0.11;
+                        
+                    pixelData[i] = grayscale;
+                    pixelData[i + 1] = grayscale;
+                    pixelData[i + 2] = grayscale;
+                    }
+                            
+                    context.putImageData(imageData, 0, 0); 
+                }
+            </pre>
+
+
+        </p>
+
+        <h4>Writing Text to Canvas</h4>
+        <p>
+            Canvas has a fillText method. It accepts a string and two position parameters. Multiple 
+            fillTexts methods can be used to place text in various places. Before using fillText you have to 
+            set the text color with fillStyle and the alignment with textAlign. You can also set the font as a property like 
+            the other 2. 
+        </p>
+
+        <h3>SVG</h3>
+        <p>
+            SVG: Scalable Vector Graphics is a specific file format that allows you to describe vector graphics using XML. 
+            A major selling point of vector graphics is that vector images preserve their quality as they are resized.
+            <br><br>
+            XML stands for eXtensible Markup Language. A markup language is a system meant to annotate text.
+        </p>
+
+        <h4>Drawing in SVG</h4>
+        <p>
+            SVG is easier to draw a circle in than canvas. Result below. Inspect element to see the SVG tags 
+            and how it's done. The viewBox attribute defines the starting location, width, and height of the SVG image.
+
+            The circle element defines a circle, with cx and cy the X and Y coordinates of the center of the circle. 
+            The radius is represented by r , while fill defines the fill style.
+        </p>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+            <circle cx="50" cy="50" r="25" fill="red"/>
+        </svg>
+        <p>
+            You can also draw rectangles and also provide a description within desc tags.
+        </p>
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 400 400">
+            <desc>Drawing a rectangle</desc>
+                <rect x="10" y="10" width="100" height="100"  
+                    fill="blue" stroke="red" stroke-width="3"  />  
+            
+        </svg>
+
+        <p>
+            Images can quickly become extremely complicated so you might want to use a vector image editor to make SVG images. 
+            Adobe Illustrator is one example. 
+            <a href="http://inkscape.org/"> Inkscape is an open source option to make SVG images that can be downloaded here.</a>
+        </p>
+
+
+        <h3>Using the Raphaël Library</h3>
+        <p>
+            Raphaël is an open-source JavaScript library that makes drawing and animating with SVG easier.
+            With a combination of HTML and JavaScript it is able to do things like make a loading icon spin.
+        </p>
+
+        <h3>Drag and Drop API</h3>
+        <p>
+            The drag and drop api lets us specify what elements are draggable and what happens when they are dragged or dropped 
+            onto other elements on the page. It can be used for dragging files from computer to web page in combination with the File 
+            API. or elements can be dragged on the same page.
+
+            <br><br>
+            If you wish to add drag and drop to the page:
+            <ol>
+                <li>Set the draggable attribute on any HTML elements you’d like to be draggable.</li>
+                <li>Add an event listener for the dragstart event on any draggable HTML elements.</li>
+                <li>Add an event listener for the dragover and drop events on any elements that you want to have accept dropped items.</li>
+            </ol>
+            The draggable attribute needs to be set to "true" explicitly
+            
+            <h4> The DataTransfer Object </h4>
+            DataTransfer objects let us set and get data about objects being dragged.
+            Including: 
+            <ul>
+                <li>type of data we're saving of teh draggable element.</li>
+                <li>The value of the data itself.</li>
+            </ul>
+            This way objects being dragged can be differentiated and move data around the way they are expected to.
+            <h4>Accepting Dropped Elements</h4>
+            <p>
+                The dropped and dragover events allow for more to be done than just drag elements around.
+            </p>
+        </p>
+        
+
+        <article id="ac3">
+            <h1>Wai-Aria? HAHA!</h1>
+            <h2 id="catHeading">Form Accessibility</h2>
+            <img src="cat.jpg" alt="WAI-ARIA Cat" id="cat">
+                    
+            <div class="content">
+            <p id="mouseContainer" class="mc">
+                <img src="mouse.jpg" alt="mouse treat" id="mouse1" draggable="true" width="30">
+                <img src="mouse.jpg" alt="mouse treat" id="mouse2" draggable="true" width="30">
+                <img src="mouse.jpg" alt="mouse treat" id="mouse3" draggable="true" width="30">
+            </p>
+        
+
+
+
+        <script src='ch12.js' type='module'></script>
     </body>
 </html>
