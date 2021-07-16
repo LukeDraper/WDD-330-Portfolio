@@ -3,10 +3,210 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WDD 330 Portfolio</title>
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="/css/notes.css" />
     </head>
     <body>
         <h1> WDD 330 Portfolio</h1>
         <h2>MDN: Using Fetch</h2>
+        <p>
+            Fetch API provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously 
+            across the network. Replaces XMLHttpRequest. Fetch can be used with service workers and other technology. It
+            works with CORS and extensions to HTTP. 
+            <br>
+            Differs from jQuery.ajax() in the following ways:
+            <ul>
+                <li>fetch() only rejects on network failure. It resolves normally even for 404 or 500 server errors.
+                    The ok property of the response will be set to false if response isn't in teh range of 200-299.
+                </li>
+            </ul>
+            Basic fetch request:
+            <pre>
+                fetch('http://example.com/movies.json')
+                .then(response => response.json())
+                .then(data => console.log(data));
+            </pre>
+            Response.json() method retrieves the json from the response.
+        </p>
+
+        <h3>Supplying Request Options</h3>
+        <p>
+            fetch method's second parameter accepts an init object allows you to control a number of different settings.
+            <pre>
+                // Example POST method implementation:
+                async function postData(url = '', data = {}) {
+                // Default options are marked with *
+                const response = await fetch(url, {
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    mode: 'cors', // no-cors, *cors, same-origin
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                    'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    redirect: 'follow', // manual, *follow, error
+                    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    body: JSON.stringify(data) // body data type must match "Content-Type" header
+                });
+                return response.json(); // parses JSON response into native JavaScript objects
+                }
+
+                postData('https://example.com/answer', { answer: 42 })
+                .then(data => {
+                    console.log(data); // JSON data parsed by `data.json()` call
+                });
+            </pre>
+        </p>
+
+        <h3>Sending request with credentials included</h3>
+        <p>
+            To cause browsers to send a request with credentials included on both same-origin and cross-origin calls.
+            add credentials: 'include' to the init object passed to the fetch method.
+            <pre>
+                fetch('https://example.com', {
+                    credentials: 'include'
+                  });
+            </pre>
+            You can also use same-origin or omit options. 
+        </p>
+
+        <h3>
+            Uploading JSON Data - use fetch to POST JSON-encoded data 
+        </h3>
+        <p>
+            <pre>
+                const data = { username: 'example' };
+
+                fetch('https://example.com/profile', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                console.log('Success:', data);
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+                });
+            </pre>
+        </p>
+        <h3>
+            Uploading a File - Files can be uploaded using an HTML <input type="file" /> input element, FormData() and fetch().
+        </h3>
+        <pre>
+            const formData = new FormData();
+            const fileField = document.querySelector('input[type="file"]');
+
+            formData.append('username', 'abc123');
+            formData.append('avatar', fileField.files[0]);
+
+            fetch('https://example.com/profile/avatar', {
+            method: 'PUT',
+            body: formData
+            })
+            .then(response => response.json())
+            .then(result => {
+            console.log('Success:', result);
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            });
+        </pre>
+
+        <h3>Uploading Multiple Files</h3>
+        <pre>
+            const formData = new FormData();
+            const photos = document.querySelector('input[type="file"][multiple]');
+
+            formData.append('title', 'My Vegas Vacation');
+            for (let i = 0; i < photos.files.length; i++) {
+            formData.append('photos', photos.files[i]);
+            }
+
+            fetch('https://example.com/posts', {
+            method: 'POST',
+            body: formData,
+            })
+            .then(response => response.json())
+            .then(result => {
+            console.log('Success:', result);
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            });
+        </pre>
+
+        <h3>Checking that the fetch was successful</h3>
+        <p>
+            A fetch() promise will reject with a TypeError if a network error occurs or CORS is misconfigure server-side. 
+            To check fetch includes checking response.ok.
+        </p>
+
+        <h3>Request Object</h3>
+        <p>
+            You can create a request object using a constructor. It takes the same parameters as the fetch() does.
+            <pre>
+                const anotherRequest = new Request(myRequest, myInit);
+            </pre>
+            You can make copies to use the request/response again. The copy must be made before the body is read.
+            Reading the body in the copy will make it read in the original.
+        </p>
+        <h3>Headers</h3>
+        <p>
+            There is a header constructor that takes name/value pairs to build a headers object. Object literal or append 
+            can be used. All of its methods throw a TypeError if a header name is not a valid HTTP Header name.
+        </p>
+
+        <h3>Guard</h3>
+        <p>
+            Headers' objects have a guard property that imposes limits on what information is mutable.
+            <br>Possible guard values:
+            <ul>
+                <li>none: default.</li>
+                <li>request: guard for a headers object obtained from a request (Request.headers).</li>
+                <li>request-no-cors: guard for a headers object obtained from a request created with Request.mode no-cors.</li>
+                <li>response: guard for a headers object obtained from a response (Response.headers).</li>
+                <li>immutable: guard that renders a headers object read-only; mostly used for ServiceWorkers.</li>
+            </ul>
+        </p>
+
+        <h3>Response Objects</h3>
+        <p>
+            Returned when fetch() promises resolve. Most common properties:
+            <ul>
+                <li>Response.status — An integer (default value 200) containing the response status code.</li>
+                <li>Response.statusText — A string (default value ""), which corresponds to the HTTP status code message. Note that HTTP/2 does not support status messages.</li>
+                <li>Response.ok — seen in use above, this is a shorthand for checking that status is in the range 200-299 inclusive. This returns a Boolean.</li>
+            </ul>
+        </p>
+
+        <h3>
+            Body 
+        </h3>
+        <p>
+            A body can be in requests and responses, and is any instance of the following types:
+            <ul>
+                <li>ArrayBuffer</li>
+                <li>ArrayBufferView (Uint8Array and friends)</li>
+                <li>Blob/File</li>
+                <li>string</li>
+                <li>URLSearchParams</li>
+                <li>FormData</li>
+            </ul>
+            The following methods can extract a body, return a promise that eventually resolves with the content:
+            <ul>
+                <li>Request.arrayBuffer() / Response.arrayBuffer()</li>
+                <li>Request.blob() / Response.blob()</li>
+                <li>Request.formData() / Response.formData()</li>
+                <li>Request.json() / Response.json()</li>
+                <li>Request.text() / Response.text()</li>
+            </ul>
+        </p>
+
+        <h3>Features can be detected by checking for existence on the window or worker scope: if(window.fetch)</h3>
+        <h3>Fetch Polyfill creates the functionality in non supporting browsers.</h3>
     </body>
 </html>

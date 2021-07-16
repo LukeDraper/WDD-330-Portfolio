@@ -3,10 +3,283 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WDD 330 Portfolio</title>
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="/css/notes.css" />
+        <style>
+            form {
+            font: 1em sans-serif;
+            max-width: 320px;
+            }
+
+            p > label {
+            display: block;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="number"],
+            textarea,
+            fieldset {
+            width : 100%;
+            border: 1px solid #333;
+            box-sizing: border-box;
+            }
+
+            input:invalid {
+            box-shadow: 0 0 5px 1px red;
+            }
+
+            input:focus:invalid {
+            box-shadow: none;
+            }
+
+
+            p * {
+            display: block;
+            }
+
+            input[type=email]{
+            -webkit-appearance: none;
+            appearance: none;
+
+            width: 100%;
+            border: 1px solid #333;
+            margin: 0;
+
+            font-family: inherit;
+            font-size: 90%;
+
+            box-sizing: border-box;
+            }
+
+            /* This is our style for the invalid fields */
+            input:invalid{
+            border-color: #900;
+            background-color: #FDD;
+            }
+
+            input:focus:invalid {
+            outline: none;
+            }
+
+            /* This is the style of our error messages */
+            .error {
+            width  : 100%;
+            padding: 0;
+
+            font-size: 80%;
+            color: white;
+            background-color: #900;
+            border-radius: 0 0 5px 5px;
+
+            box-sizing: border-box;
+            }
+
+            .error.active {
+            padding: 0.3em;
+            }
+        </style>
     </head>
     <body>
         <h1> WDD 330 Portfolio</h1>
         <h2>MDN: Validating Forms</h2>
+        <h3>Client-side Validation Example</h3>
+        <form>
+            <p>
+              <fieldset>
+                <legend>Do you have a driver's license?<abbr title="This field is mandatory" aria-label="required">*</abbr></legend>
+                <!-- While only one radio button in a same-named group can be selected at a time,
+                     and therefore only one radio button in a same-named group having the "required"
+                     attribute suffices in making a selection a requirement -->
+                <input type="radio" required name="driver" id="r1" value="yes"><label for="r1">Yes</label>
+                <input type="radio" required name="driver" id="r2" value="no"><label for="r2">No</label>
+              </fieldset>
+            </p>
+            <p>
+              <label for="n1">How old are you?</label>
+              <!-- The pattern attribute can act as a fallback for browsers which
+                   don't implement the number input type but support the pattern attribute.
+                   Please note that browsers that support the pattern attribute will make it
+                   fail silently when used with a number field.
+                   Its usage here acts only as a fallback -->
+              <input type="number" min="12" max="120" step="1" id="n1" name="age"
+                     pattern="\d+">
+            </p>
+            <p>
+              <label for="t1">What's your favorite fruit?<abbr title="This field is mandatory" aria-label="required">*</abbr></label>
+              <input type="text" id="t1" name="fruit" list="l1" required
+                     pattern="[Bb]anana|[Cc]herry|[Aa]pple|[Ss]trawberry|[Ll]emon|[Oo]range">
+              <datalist id="l1">
+                <option>Banana</option>
+                <option>Cherry</option>
+                <option>Apple</option>
+                <option>Strawberry</option>
+                <option>Lemon</option>
+                <option>Orange</option>
+              </datalist>
+            </p>
+            <p>
+              <label for="t2">What's your e-mail address?</label>
+              <input type="email" id="t2" name="email">
+            </p>
+            <p>
+              <label for="t3">Leave a short message</label>
+              <textarea id="t3" name="msg" maxlength="140" rows="5"></textarea>
+            </p>
+            <p>
+              <button>Submit</button>
+            </p>
+          </form>
+
+          <h3>Client-side Form Validation</h3>
+        <p>
+            Client-side form validation checks that data meets the requirements before sending it to server. The server should 
+            check it as well because it is relatively easy to bypass. Client-side validation should still be done to avoid wasting 
+            server time as much as possible. To test server-side validation you can disable client side-validation with the following.
+            <pre>
+                javascript:for(var f=document.forms,i=f.length;i--;)f[i].setAttribute('novalidate',i);
+            </pre>
+            <h4>Goals of Client-side Validation</h4>
+            <ul>
+                <li>Get the right data, in the right format</li>
+                <li>Protect our users' data through secure passwords</li>
+                <li>Protect ourselves. Malicious users can misuse unprotected forms to damage the application.</li>
+            </ul>
+            <h4>2 types of client side validation</h4>
+            <ul>
+                <li>Built-in form validation: better performance than Javascript. Built into HTML5.</li>
+                <li>Javascript validation customizable. Create it all or use library.</li>
+            </ul>
+            <h4>Built in form validation</h4>
+            <ul>
+                <li>required attribute</li>
+                <li>minlength and maxlength for length of strings</li>
+                <li>min and max for numerical values </li>
+                <li>type: specifies whether data needs to be number, email, or other preset type.</li>
+                <li>pattern: regular expression for data to follow</li>
+            </ul>
+            When and element is valid the browser will submit the form unless Javascript stops it. Element matches :valid CSS 
+            pseudo-class. 
+
+            <br><br>
+            When element is invalid matches :invalid CSS pseudo-class. Browser will block form submission and may display error message.
+        </p>
+
+        <h4>Regular Expressions</h4>
+        <p>
+            regexps are patterns that can be used to match character combinations in text strings. <br>
+            Here are some examples:
+            <ul>
+                <li>a  -- Matches one character that is 'a' only</li>
+                <li>abc -- Matches this string.</li>
+                <li>ab?c -- The single b is optional. ac or abc.</li>
+                <li>ab*c --Any number of b's are optional matches ac, abc, abbbbbbc and so on. </li>
+                <li>a|b -- Matches one of either a or b </li>
+                <li>abc|xyz -- matches exactly either abc or xyz.</li>
+            </ul>
+        </p>
+
+        <h3>JavaScript Validation</h3>
+        <p>
+            Constraint Validation API consists of a set of methods and properties on these form element DOM interfaces:
+            <ul>
+                <li>HTMLButtonElement (represents a <button> element)</li>
+                <li>HTMLFieldSetElement (represents a <fieldset> element)</li>
+                <li>HTMLInputElement (represents an <input> element)</li>
+                <li>HTMLOutputElement (represents an <output> element)</li>
+                <li>HTMLSelectElement (represents a <select> element)</li>
+                <li>HTMLTextAreaElement (represents a <textarea> element)</li>
+            </ul>
+            The API makes the following properties available on the above elements:
+            <ul>
+                <li>validationMessage returns a message describing which validation constraints the control doesn't satisfy</li>
+                <li>validity: returns a ValidityState object that has the following properties plus more not listed here:
+                    <ul>
+                        <li>patternMismatch: returns true if value doesn't match specified pattern.</li>
+                        <li>tooLong: returns true if longer than maxlength.</li>
+                        <li>tooShort: returns true if shorter than minlength.</li>
+                        <li>rangeOverflow: returns true if value greater max attribute. matches :invalid and :out-of-range. </li>
+                        <li>rangeUnderflow: returns true if value less than min attribute. </li>
+                        <li>typeMismatch: returns true if value is not in required syntax for the type.</li>
+                        <li>valid: returns true if element meets all validation constraints.</li>
+                        <li>valueMissing: returns true if element has require attribute but no value.</li>
+                    </ul>
+                </li>
+                <li>willValidate: returns true if the element will be validated when the form is submitted.</li>
+            </ul>
+            Method of constraint validation API:
+            <ul>
+                <li>checkValidity() returns true if valid. Fires invalid event on element if invalid.</li>
+                <li>setCustomValidity(message): Adds custom error message to element. Shows message to user if invalid.
+                    <br>
+                    These messages can't be changed with CSS. They depend on browser locale.
+                </li>
+            </ul>
+        </p>
+        <h3>JavaScript Validation Example</h3>
+        <form novalidate>
+            <p>
+              <label for="mail">
+                <span>Please enter an email address:</span>
+                <input type="email" id="mail" name="mail" required minlength="8">
+                <span class="error" aria-live="polite"></span>
+              </label>
+            </p>
+            <button>Submit</button>
+          </form>
+
+          <script>
+
+                // There are many ways to pick a DOM node; here we get the form itself and the email
+                // input box, as well as the span element into which we will place the error message.
+                const form  = document.getElementsByTagName('form')[0];
+
+                const email = document.getElementById('mail');
+                const emailError = document.querySelector('#mail + span.error');
+
+                email.addEventListener('input', function (event) {
+                // Each time the user types something, we check if the
+                // form fields are valid.
+
+                if (email.validity.valid) {
+                    // In case there is an error message visible, if the field
+                    // is valid, we remove the error message.
+                    emailError.textContent = ''; // Reset the content of the message
+                    emailError.className = 'error'; // Reset the visual state of the message
+                } else {
+                    // If there is still an error, show the correct error
+                    showError();
+                }
+                });
+
+                form.addEventListener('submit', function (event) {
+                // if the email field is valid, we let the form submit
+
+                if(!email.validity.valid) {
+                    // If it isn't, we display an appropriate error message
+                    showError();
+                    // Then we prevent the form from being sent by canceling the event
+                    event.preventDefault();
+                }
+                });
+
+                function showError() {
+                if(email.validity.valueMissing) {
+                    // If the field is empty,
+                    // display the following error message.
+                    emailError.textContent = 'You need to enter an e-mail address.';
+                } else if(email.validity.typeMismatch) {
+                    // If the field doesn't contain an email address,
+                    // display the following error message.
+                    emailError.textContent = 'Entered value needs to be an e-mail address.';
+                } else if(email.validity.tooShort) {
+                    // If the data is too short,
+                    // display the following error message.
+                    emailError.textContent = `Email should be at least ${ email.minLength } characters; you entered ${ email.value.length }.`;
+                }
+
+                // Set the styling appropriately
+                emailError.className = 'error active';
+                }
+          </script>
     </body>
 </html>

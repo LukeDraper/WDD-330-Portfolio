@@ -17,3 +17,15 @@ h1, h2, h3, h4, h4, h5, h6 {
 p {
     text-indent: 1rem;
 }
+
+pre {
+    padding: 8px;
+    background-color: white;
+    border: 1px black solid;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}

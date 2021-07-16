@@ -3,7 +3,24 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WDD 330 Portfolio</title>
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="/css/notes.css" />
+        <style>
+            #square, #square1 {
+                margin: 100px;
+                width: 100px;
+                height: 100px;
+                background: #d16;
+            }
+
+            #squarecss {
+                margin: 100px;
+                width: 100px;
+                height: 100px;
+                background: #cc0;
+                animation: spin 4s linear infinite;
+            }
+            @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(720deg); } }
+        </style>
     </head>
     <body>
         <h1> WDD 330 Portfolio</h1>
@@ -60,10 +77,253 @@
                 </li>
 
                 <li>
-                    window.location.protocol 
+                    window.location.protocol returns a string describing the protocol used (such as http, https, po2, ftp, etc) Note that There
+                    is a colon at the end.
+                </li>
+                <li>
+                    window.location.host property returns a string describing the domain of the current URL and the port number(this is omitted if the default port 80 is used.)
+                </li>
+                <li>
+                    window.location.hostname returns the domain of the current url ("www.sitepoint.com")
+                </li>
+                <li>
+                    window.location.port returns a string describing the port number, but will return an empty string if the port is not explicitly stated in the URL.
+
+                </li>
+                <li>
+                    window.location.pathname returns the string of the path that follows the domain.
+                </li>
+                <li>
+                    window.location.search returns a string that starts with a "?" followed by the query string parameters. It returns an empty string 
+                    if there are no query string parameters. 
+                </li>
+                <li>
+                    window.location.hash property returns a string that starts with a # followed by the fragment identifier. It returns an empty string if there is 
+                    no fragment identifier.
+                </li>
+                <li>
+                    window.location origin property returns a string that shows the protocol and domain where the current page originated from. This property is read-only, so it can't 
+                    be changed.
+                </li>
+            </ul>
+            <h5>window.location methods</h5>
+            <ul>
+                <li>window.location.reload() forces a reload of the current page. If given a parameter of true it will force a browser to reload() the page from the server instead 
+                    of using a cached page.
+                </li>
+                <li>
+                    window.location.assign("https://www.sitepoint.com/") method can be used to load  another resource from a URL provided as a parameter.
+                </li>
+                <li>
+                    window.location.replace() method is like the assign() method except the current page will not be stored in the session history, so the user will be unable to navigate back 
+                    to navigate back to it using the back button.   
+
+                </li>
+                <li>
+                    window.location.toString() method returns a string that contains the whole URL.
+                </li>
+            </ul>
+        </p>
+        
+        <h5>The Browser History</h5>
+        <p>
+            The window.history property can be used to access information about any previously visited pages in the current browser session. It is different from 
+            the HTML5 History API.
+            <ul>
+                <li>
+                    window.history.length property shows how many pages have been visited before arriving at the current page.
+                </li>
+                <li>
+                    window.history.go() method can be used to go to a specific page, where 0 is the current page.
+                    <pre>
+                        window.history.go(1); // goes forward 1 page
+                        window.history.go(0); // reloads the current page
+                        window.history.go(-1); // goes back 1 page
+                    </pre>
+                    window.history.forward() and window.history.back() methods can navigate forwards and backwards by one page, like using the browser's forward and back 
+                    buttons.
                 </li>
             </ul>
         </p>
 
+        <h5>Controlling Windows</h5>
+        <p>
+            <ul>
+                <li>
+                    window.open() method opens a new window. Takes the URL of the page to be opened as its first parameter, the window title as its second parameter, and 
+            a list of attributes as the third parameter. Returns a reference to the window. Store the reference in a variable to affect the window with other methods.
+                </li>
+                <li>
+                    myWindow.close() can close a window. Called on the reference.
+                </li>
+                <li>
+                    window.moveTo() method takes two parameters that are the X and Y coordinates of the screen that the window is to be moved to.
+                    <pre>
+                        window.moveTo(0,0); // will move the window to the top-left corner of the screen
+                    </pre>
+                </li>
+                <li>
+                    window.resizeTo() method takes two parameters that specify the width and height of the resized window's dimensions.
+                    <pre>
+                        window.resizeTo(600,400);
+                    </pre>
+                </li>
+            </ul>
+
+        </p>
+         <h5>Screen Information</h5>
+         <ul>
+             <li>
+                window.screen object contains information about the screen the browser is displayed on. You can find out the height and width of the 
+                screen in pixels using the height and width properties respectively. Has availHeight and availWidth properties to find the height and width of the 
+                screen, excluding any operating system menus.
+             </li>
+             <li>
+                 colorDepth property can be used to find the color bit depth of the user's monitor, although there are few use cases for doing this other 
+                 than collecting user statistics.
+             </li>
+         </ul>
+
+         <h4>The Document Object</h4>
+         <p>
+             Every window object has a document object. It has properties and methods that deal with the page that 
+             has been loaded into the window.
+             <ul>
+                 <li>
+                     document.write() method writes a string of text to the page. If a page has already load, it will completely replace the current 
+                     document.
+                     <br><br>
+                     document.write() can be used within script tags to inject a string into the markup. This doesn't overwrite the rest of the HTML on the page.
+                     <br><br>
+                     The use of document.write() is heavily frowned upon as it can only be realistically used by mixing JavaScript within an HTML document. There are still some extremely rare legitimate uses of it, but a ninja programmer will hardly ever need to use it.
+                 </li>
+             </ul>
+         </p>
+
+         <h4>Cookies</h4>
+         <p>
+             Cookies are small files that are saved locally on a users computer. Allows for personalized information 
+             about each user to be remembered.
+             <ul>
+                 <li>Only the domain that sets a cookie can access it.</li>
+                 <li>20 cookies are allowed per domain.</li>
+                 <li>4KB of data are allowed to be stored in each cookie.</li>
+                 <li>Contain a list of name-value pairs separated by semicolons. For example: 
+                     <pre>
+                        "name=Superman; hero=true; city=Metropolis"
+                     </pre>
+                 </li>
+             </ul>
+         </p>
+         <h5>Creating Cookies </h5>
+         <p>
+             To create a cookies you assign the name-value pair as a string to the document.cookie property:
+             <pre>
+                document.cookie = 'hero=true';
+                << "hero=true"
+                document.cookie = 'city=Metropolis';
+                << "city=Metropolis"
+             </pre>
+             Assiging more cookies just appends them to the end of the string.
+             <ul>
+                 <li>
+                     Cookie values can be changed by reassigning it to the document.cookie property with the same name, but a different 
+                     value.
+                 </li>
+                 <li>
+                     document.cookie can return the entire contents of the cookie jar. The split method can be used to break the string into an array
+                     containing each name/value pair. Then a for of loop can be used to iterate through the array.
+                     <pre>
+                        const cookies = document.cookie.split("; ");
+                        for (crumb of cookies){
+                            const [key,value] = crumb.split("=");
+                            console.log(`The value of ${key} is ${value}`);
+                        }
+                        << The value of name is Batman
+                        The value of hero is true
+                        The value of city is Gotham
+                     </pre>
+                 </li>
+                 <li>
+                     Cookies are session cookies by default, so they are deleted when the browser tab or window is closed.
+                     They can be made persistent by adding "; expires=date" to the end of the cookie when it's set, where date is a date value in 
+                     UTC string format Day, DD-Mon-YYYY HH:MM:SS GMT . The following example sets a cookie to expire in one day’s time:
+                     <pre>
+                        const expiryDate = new Date(); 
+                        const tomorrow = expiryDate.getTime() + 1000 * 60 * 60 * 24;
+                        expiryDate.setTime(tomorrow);
+                        document.cookie = `name=Batman; expires=${ expiryDate.toUTCString()}`;
+                     </pre>
+                     The max-age value could also be set, but it's not supported in Internet Explorer before version 10.
+                 </li>
+                 <li>By default, cookies can only be read by pages inside the same directory and domain as the file was set. This is for security reasons
+                     so that access to the cookie is limited. The path can be changed that that any page in the root directory can read the cookie.
+                     It's done by adding the string "; path=/" to the end of the cookie when it is set.
+                 </li>
+                 <li>Adding the string "; secure" to the end of a cookie makes sure it's only sent over a secure HTTPS network.</li>
+                 <li>
+                     To remove a cookie, you need to set it to expire at a time in the past.
+                     <pre>
+                        document.cookie = 'name=Batman; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+                     </pre>
+                 </li>
+             </ul>
+         </p>
+
+         <h3>Timing Functions</h3>
+         <p>
+            The window object provides some methods for scheduling the execution of a function, and for repeatedly executing functions at
+            regular intervals.
+            <ul>
+                <li>
+                    window.setTimeout() method accepts a callback function as its first parameter and a number of milliseconds as 
+                    its second parameter. It will call the callback function after the time interval.
+                    It also returns an integer which is the ID used to reference this timeout.
+                </li>
+                <li>
+                    clearTimeout() accepts a timeout ID, and it will clear that timeout if it hasn't been called yet.
+                </li>
+                <li>
+                    window.setInterval() works like setTimeout() but calls the function after every given number of milliseconds.
+                    window.clearInteral can clear setInterval() like 
+                </li>
+            </ul>
+         </p>
+        
+         <h3>Animation</h3>
+         <p>
+             setTimeout() and setInterval() methods can be used to animate elements on a web page. This was the only way to achieve animation before 
+             the window.requestAnimationFrame() method was developed.
+         </p>
+         <div id='square1'></div>
+         <h4>requestAnimationFrame</h4>
+         <p>
+             The window.requestAnimationFrame() method works like window.setInterval(), but it's optimized for animation.
+             It uses the browser's built in graphics-handling capabilities and doesn't run the animation when the tab is inactive.
+            
+         </p>
+         <div id='square'></div>
+
+         <h3>Pure CSS Animation</h3>
+         <p>Use Pure CSS animation. It's generally more lightweight.</p>
+         <div id="squarecss"></div>
+
+         <script>
+            const squareElement1 = document.getElementById('square1');
+            let angle1 = 0;
+            setInterval( () => {
+                angle1 = (angle1 + 2) % 360;
+                squareElement1.style.transform = `rotate(${angle1}deg)`
+            }, 1000/60);
+
+            const squareElement = document.getElementById('square');
+            let angle = 0;
+            function rotate() {
+                angle = (angle + 2)%360;
+                squareElement.style.transform = `rotate(${angle}deg)`
+                window.requestAnimationFrame(rotate);
+            }
+            const id = requestAnimationFrame(rotate);
+         </script>
     </body>
 </html>

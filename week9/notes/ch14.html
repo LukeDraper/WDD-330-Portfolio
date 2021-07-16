@@ -3,10 +3,287 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WDD 330 Portfolio</title>
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="/css/notes.css" />
     </head>
     <body>
         <h1> WDD 330 Portfolio</h1>
         <h2>Chapter 14: HTML5 APIs</h2>
+        <h3>The data- attribute</h3>
+        <p>
+            The data- attribute is a way to embed data in a web page using custom attributes ignored by the browser so that the 
+            data can be used by JavaScript.
+            The names of the attributes have 3 requirements:
+            <ul>
+                <li>Start with data-</li>
+                <li>COntain only lowercase letters, numbers, hyphens, dots, colons or underscores.</li>
+                <li>Include an optional string value.</li>
+            </ul>
+            INformation contained in attributes can be used to identify particular elements(all dropdown menus could have data-dropdown) It can also be used to 
+            filter elements (find all elements with a data-rating of 3 or more). Each element has a dataset property that  can  be used to access all data- attributes.
+            <pre>
+                <div id='hero' data-powers='flight superSpeed'>
+                    Superman
+                </div>
+
+                const superman = document.getElementById('hero');
+                const powers = superman.dataset.powers;
+                << 'flight superSpeed'
+            </pre>
+
+            The data- prefix is dropped and the data- attributes act like properties of the dataset object.
+            There is a restriction of only using string values, but you can encode JavaScript objects as JSON strings
+            and perform type conversion.
+        </p>
+        <h3>HTML5 APIs</h3>
+        <p>
+            HTML5 has APIs that help to gain access to hardware, like cameras, batteries, geolocation, and the graphics card.
+        </p>
+        <h4>HTML5 Web Storage</h4>
+        <p>
+            Web Storage API provides a key-value store on the client's computer like cookies but with fewer restrictions, more storage capacity, and 
+            it's generally easier to use. It's good for storing information about users or application specific information.
+            <br><br>
+            Difference of the Web Storage API from Cookies 
+            <ul>
+                <li>Information stored is not shared with the server on every request.</li>
+                <li>Information is available in multiple windows of the browser (but only if the domain is the same)</li>
+                <li>Storage capacity limit is much larger than the 4KB for cookies. (No limit in specification, but most browsers 
+                    limit to 5GB per domain.
+                </li>
+                <li>
+                    Any data stored does not automatically expire as it does with cookies. This potentiall makes cookies a better choice for something 
+                    like showing a popup once a day.
+                </li>
+            </ul>
+            localStorage and sessionStorage are part of the Web Storage API. Information is saved as strings in key-value pairs.
+            Save with: 
+            <pre>
+                localStorage.setItem('name', 'Walter White');
+
+            get with:
+
+                localStorage.getItem('name'); 
+                << "Walter White"
+
+            or use the property version:
+
+                localStorage.name = 'Heisenberg'; 
+                console.log(localStorage.name); 
+                << "Heisenberg";
+            </pre>
+            To remove an entry use the removeItem method or the delete operator. Use the localStorage.clear() method 
+            to remove everything in localStorage.
+            <br><br>
+            Everyt time a value is saved to storage an event is fired. Has the following properties
+            <ul>
+                <li>key tells us the key of the item that changed</li>
+                <li>newValue tells us the new value it has been changed to</li>
+                <li>oldValue tells us the previous value</li>
+                <li>storageArea tells us if it is stored in local or session storage</li>
+            </ul>
+        </p>
+
+        <h4>Geolocation</h4>
+        <p>
+            Due to privacy concerns, user permission is needed to access geolocation. It can find location, nearby places,
+            or measure the speed the user is moving. If geolocation is available it will be a property of the navigator object.
+            This property has a method called getCurrentPosition() that will return a position object to a specified callback function 
+            <pre>
+                navigator.geolocation.getCurrentPosition(youAreHere);
+            </pre>
+            <h5>navigator.position</h5>
+            The position object passed to the callback function has a coords property with a latitude and longitude property.
+            It's other properties include:
+            <ul>
+                <li>position.speed property returns the ground speed of the device in meters per second.</li>
+                <li>position.altitude property returns an estimate of the device’s altitude in meters above theWGS84ellipsoid, which is a standard measurement for the center of the Earth.</li>
+                <li>position.heading property returns the direction the device is moving in. This is measured as a bearing in degrees, clockwise from North.</li>
+                <li>position.timestamp property returns the time that the position information was recorded.</li>
+                <li>position.accuracy method returns the accuracy of longitude and latitude in meters.</li>
+            </ul>
+
+            <br><br>
+            navigator.geolocation.watchPosition() method will call the callback function passed in every time the position 
+            is updated. Returns the id of the watch.
+            <br><br>
+            navigator.geolocation.clearWatch() stops the callback being called using the id of the watch as an argument.
+            
+        </p>
+
+        <h4>
+            Web Workers
+        </h4>
+        <p>
+            JavaScript is a single-threaded language, but web workers allow processes to be run in the background.
+            Use Worker() constructor function to create a new worker.
+            <pre>
+                const worker = new Worker('task.js');
+            </pre>
+            The function takes the name of another JavaScript file as an argument. This file will be downloaded asynchronously 
+            if it exists. The variable assigned to the worker can be used to refer to the worker in the main program. In the 
+            worker script (task.js in the example) self refers to the worker.
+            <br><br> 
+            The worker object can use the postMessage() method to send a message between the worker and the main script. 
+            <pre>
+                worker.addEventListener('message', (event) => {
+                    console.log(event.data);
+                }, false);
+            </pre>
+            This event listener can be used to listen for and process messages. When the worker script is done 
+            either worker.terminate(); or self.close(); can be used to stop the worker.
+            <br>
+            <br>
+            It is possible to have shared web workers 
+
+        </p>
+
+        <h4>
+            A Factorizing Example 
+        </h4>
+        <button id='rainbow'>Change Color</button>
+        <form>
+            <label for='number'>Enter a Number to Factorize:</label>
+            <input id='number' type='number' name='number' min=1 value='20'>
+            <button type='submit'>Submit</button>
+        </form>
+        <div id='output'></div>
+
+        <h4>Service Workers</h4>
+        <p>
+            Service Worker API allows a worker script to run in background, but with ability to intercept network requests. 
+            This allows you to work differently if offline and create app-like offline experiences.
+        </p>
+
+        <h4>Websockets</h4>
+        <p>
+            A new protocol that allows for two-way communication with a server. Also known as push messaging. A connection is 
+            kept open and responses are 'pushed' to the client as soon as they are received.
+        </p>
+
+        <h4>Websocket Example</h4>
+        <form>
+            <label for='message'>Enter a Message:</label>
+            <input type='text' name='message'>
+            <button type='submit'>Submit</button>
+        </form>
+        <div id='output1'></div>
+
+        <h4>Notifications</h4>
+        <p>
+            Notifications allow you to show messages using the system's Notifications. This is usually a popup in the corner of the 
+            screen but depends on the operating system. System Notifications will be displayed even if the web page that calls them isn't the current 
+            tab. You need permission from the user with the requestPermission() method of a Notification global object before you can send notifications.
+            <pre>
+                if(window.Notification) {
+                    Notification.requestPermission();
+                }
+            </pre>
+            This returns a promise with the permission property of the Notification object set to eiher 'granted' or 'denied'. If it's set to granted, 
+            you can create a new notification using a constructor function like so:
+            <pre>
+                if(window.Notification) {
+                    Notification.requestPermission()
+                    .then((permission) => {
+                        if(Notification.permission === 'granted') {
+                        new Notification('Hello JavaScript!');
+                        }
+                    });
+                }
+            </pre>
+            Notifications are required to have a title passed as their first paremeter. The second parameter is an object of options.
+            This includes a body property that specifies the text to appear below the title or an icon that links to an image.
+            <pre>
+                const notification = new Notification('JavaScript: Novice to Ninja',{
+                    body: 'The new book from SitePoint',
+                    icon: 'sitepointlogo.png'
+                });
+            </pre>
+            Some browsers and OS's close notifications automatically, but you can also use myNotification.close().
+            Event listeners like click can be added to notifications to do things like open a new window.
+        </p>
+
+        <h4>Multimedia</h4>
+        <p>
+            Media API works with audio and video tags to control playback using JavaScript.
+            The elements are referenced using DOM methods, and you can use the specific methods from there:
+            <pre>
+                const video = document.getElementsByTagName('video')[0];
+            </pre>
+            play(), pause(), volume(), muted, currentTime(), playbackRate, loop, and duration are properties and methods of 
+            the media objects. play, pause, volumechange, and loadedmetadata are all events associated with these elements.
+        </p>
+
+        <h4>Shims and Polyfills</h4>
+        <p>
+            Shims and polyfills fill in to implement missing functionality for browsers that don't support features. 
+            Shims are pieces of code that adds missing functionality to a browser. Polyfills are shims that achieve the same 
+            function while also using API commands for if the feature was supported natively.
+        </p>
+
+        
+
+
+        <script>
+            //Factorizing Example
+            const btn = document.getElementById('rainbow');
+            const rainbow = ['red','orange','yellow','green','blue','rebeccapurple','violet'];
+            function change() {      
+                document.body.style.background = rainbow[Math.floor(7*
+                Math.random())];
+            }
+            btn.addEventListener('click', change);
+
+            const form = document.forms[0];
+            form.addEventListener('submit', factorize, false);
+            function factorize(event) {
+                // prevent the form from being submitted
+                event.preventDefault();   
+                document.getElementById('output').innerHTML = '<p>This could take a while ...</p>';
+                const number = Number(form.number.value);
+                if(window.Worker) {
+                    const worker = new Worker('factors.js');
+                    worker.postMessage(number);
+                    worker.addEventListener('message', (event) => {
+                    document.getElementById('output').innerHTML = event.data;
+                    }, false);
+                }
+            }
+
+
+            //Websocket Example
+            const URL = 'wss://echo.websocket.org/';
+            const outputDiv = document.getElementById('output1');
+            const form2 = document.forms[1];
+            const connection = new WebSocket(URL);
+            connection.addEventListener('open', () => {
+                output('CONNECTED');
+            }, false);
+
+            function output(message) {
+                const para = document.createElement('p');
+                para.innerHTML = message;
+                outputDiv.appendChild(para);
+            }
+
+            form2.addEventListener('submit', message, false);
+
+            function message(event) {
+                event.preventDefault();
+                const text = form2.message.value;
+                output(`SENT: ${text}`);
+                connection.send(text);
+            }
+
+            connection.addEventListener('message', (event) => {
+                output(`RESPONSE: ${event.data}`);
+            }, false);
+
+            connection.addEventListener('close', () => {
+                output('DISCONNECTED');
+            }, false);
+            connection.addEventListener('error', (event) => {
+            output(`<span style='color: red;'>ERROR: ${event.data}</span>`);
+            }, false);
+        </script>
     </body>
 </html>
