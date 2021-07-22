@@ -45,6 +45,7 @@ export async function getJSON(url) {
     });
 }
 
+
 export {
     qs,
     onTouch

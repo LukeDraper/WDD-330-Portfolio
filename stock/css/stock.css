@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+#container {
+    background-color: whitesmoke;
+    border-radius: 3px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+body {
+    background-color: #3a3a3a;
+    font-family: 'Rubik', sans-serif;
+}
+
+main {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    padding-top: .1rem;
+}
+
+
+
+header h1 {
+    color: #1366d3;
+    background-color: #3a3a3a;
+    padding: 5px;
+    max-width: 400px;
+    margin: auto;
+    
+}
+
+#account-info {
+    margin-top: -12px;
+    margin: auto;
+    max-width: 200px;
+}
+
+footer {
+    background-color: #aaaaaa;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.active {
+    background-color: #1366d3;
+    color: white;
+}
+
+.active:hover {
+    background-color: #147aff;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+nav button {
+    width: 100%;
+    height: 2rem;
+
+}
+
+#stockList {
+    list-style: none;
+    padding-inline-start: 0px;
+}
+
+#stockList li {
+    border: 1px solid #3a3a3a;
+    margin: 2px;
+    padding: 10px;
+    border-radius: 16px;
+}
+
+
+#pageBtns button {
+    font-size: 36px;
+    width: 50px;
+    height: 50px;
+    max-width: 25%;
+    color: #1366d3;
+    border: none;
+}
+
+#backBtn {
+    color: #1366d3;
+    background-color: #3a3a3a;
+    padding: 5px;
+}
+
+#pageBtns button:hover, #backBtn:hover {
+    color: white;
+    background-color: #1366d3;
+}
+
+form input[type='submit'] {
+    color: white;
+    background-color: #1366d3;
+    display: block;
+    padding: 10px;
+    font-size: 20px;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+form input[type='submit']:hover {
+    background-color: #147aff;
+
+}
+
+footer {
+    padding: 4px;
+}

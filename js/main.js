@@ -44,8 +44,8 @@ const links = [
         url: "week11/index.html"
     },
     {
-        label: "Week 12 Team Activity",
-        url: "week12/index.html"
+        label: "Final Project: Stock Simulation",
+        url: "stock/index.html"
     }
 ];
 
